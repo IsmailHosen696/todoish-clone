@@ -1,22 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { noteType } from '../types'
-import { AppDispatch, RootState } from './store'
+import { noteType, projectType } from '../types'
 
 interface NoteState {
     notes: noteType[],
-    isLoading: boolean
+    isLoading: boolean,
+    projects: projectType[]
 }
 
 const initialState: NoteState = {
     notes: [],
-    isLoading: false
+    isLoading: false,
+    projects: []
 }
 
 export const noteSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
+        projects: (state, action: PayloadAction<projectType[]>) => {
+            state.projects = action.payload;
+        },
+        addProjects: (state, action: PayloadAction<projectType>) => {
+            state.projects = [...state.projects, action.payload];
+        },
         addNote: (state, action: PayloadAction<noteType>) => {
             state.notes = [...state.notes, action.payload];
         },
@@ -31,7 +37,7 @@ export const noteSlice = createSlice({
                         inTrash: !note.inTrash
                     }
                 }
-                return note
+                return note;
             })
         },
         makeComplete: (state, action: PayloadAction<string>) => {
@@ -42,21 +48,18 @@ export const noteSlice = createSlice({
                         isCompleted: !note.isCompleted
                     }
                 }
-                return note
-            })
+                return note;
+            });
         },
         deleteNote: (state, action: PayloadAction<string>) => {
-            state.notes = state.notes.filter(note => note.id !== action.payload)
+            state.notes = state.notes.filter(note => note.id !== action.payload);
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
-            state.isLoading = action.payload
+            state.isLoading = action.payload;
         }
     },
 })
 
-export const { addNote, setNotes, setLoading, addToTrash, makeComplete, deleteNote } = noteSlice.actions
+export const { addNote, setNotes, setLoading, addToTrash, makeComplete, deleteNote, addProjects, projects } = noteSlice.actions
 
 export default noteSlice.reducer
-
-export const useNoteAppDispatch = () => useDispatch<AppDispatch>()
-export const useNoteAppSelector: TypedUseSelectorHook<RootState> = useSelector

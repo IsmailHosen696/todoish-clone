@@ -13,3 +13,8 @@ export type userType = {
     username: string;
     email: string;
 }
+export type projectType = {
+    id: string;
+    name: string;
+    color: string
+}

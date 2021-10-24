@@ -2,20 +2,19 @@ import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from "./components/utilities/Navbar";
 import NewNotePopUp from "./components/utilities/NewNotePopUp";
+import NewProject from "./components/utilities/NewProject";
 import Sidebar from "./components/utilities/Sidebar";
 import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice";
 
 // PAGES
-const Allnotes = lazy(() => import('./components/pages/Allnotes'));
-const Important = lazy(() => import('./components/pages/Important'));
-const Today = lazy(() => import('./components/pages/Today'));
-const Trash = lazy(() => import('./components/pages/Trash'));
+const Inbox = lazy(() => import('./components/pages/Inbox'));
 const Upcoming = lazy(() => import('./components/pages/Upcoming'));
-const PagenotFound = lazy(() => import('./components/pages/PagenotFound'));
+const Today = lazy(() => import('./components/pages/Today'));
+const PageNotFound = lazy(() => import('./components/pages/PageNotFound'));
 
 function App() {
 
-  const { theme, isAddNoteOpen } = useAppSelector(state => state.notesutils);
+  const { theme, isAddNoteOpen, isSidebarOpen, isNewProjectOpen } = useAppSelector(state => state.notesutils);
   const dispatch = useAppDispatch();
   useEffect(() => {
     const localtheme = String(localStorage.getItem('theme'));
@@ -30,23 +29,26 @@ function App() {
       }
     }
   }, [dispatch]);
+
   return (
     <div className={`${theme === 'darkTheme' && 'dark'}`}>
-      <div className="bg-viewboxWhite w-full min-h-screen dark:bg-viewboxDark">
+      <div className="bg-viewboxWhite w-full dark:bg-viewboxDark overflow-hidden min-h-screen">
         <Suspense fallback={'loading'}>
           <Router>
-            <Navbar />
-            <Sidebar />
-
-            {isAddNoteOpen && <NewNotePopUp />}
-            <Switch>
-              <Route exact path='/' component={Allnotes} />
-              <Route path='/today' component={Today} />
-              <Route path='/upcoming' component={Upcoming} />
-              <Route path='/important' component={Important} />
-              <Route path='/trash' component={Trash} />
-              <Route component={PagenotFound} />
-            </Switch>
+            <>
+              <Navbar />
+              <Sidebar />
+              {isAddNoteOpen && <NewNotePopUp />}
+              {isNewProjectOpen && <NewProject />}
+            </>
+            <div className={`mt-12 ${isSidebarOpen ? 'ml-52' : "ml-10"} z-0 transition-all duration-200`}>
+              <Switch>
+                <Route exact path='/' component={Inbox} />
+                <Route exact path='/today' component={Today} />
+                <Route exact path='/upcoming' component={Upcoming} />
+                <Route path='*' component={PageNotFound} />
+              </Switch>
+            </div>
           </Router>
         </Suspense>
       </div>

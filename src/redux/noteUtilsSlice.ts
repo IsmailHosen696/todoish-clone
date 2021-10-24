@@ -5,13 +5,15 @@ import { AppDispatch, RootState } from './store'
 interface NoteUtilsState {
     theme: string,
     isSidebarOpen: boolean,
-    isAddNoteOpen: boolean
+    isAddNoteOpen: boolean,
+    isNewProjectOpen: boolean
 }
 
 const initialState: NoteUtilsState = {
     theme: '',
     isSidebarOpen: true,
-    isAddNoteOpen: false
+    isAddNoteOpen: false,
+    isNewProjectOpen: false
 }
 
 export const noteUtilsSlice = createSlice({
@@ -26,11 +28,14 @@ export const noteUtilsSlice = createSlice({
         },
         setAddNotePopOpen: (state, action: PayloadAction<boolean>) => {
             state.isAddNoteOpen = action.payload
+        },
+        setNewProjectOpen: (state, action: PayloadAction<boolean>) => {
+            state.isNewProjectOpen = action.payload
         }
     },
 })
 
-export const { setTheme, setSidebarOpen, setAddNotePopOpen } = noteUtilsSlice.actions
+export const { setTheme, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen } = noteUtilsSlice.actions
 
 export default noteUtilsSlice.reducer
 

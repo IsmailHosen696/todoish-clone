@@ -10,3 +10,6 @@
 .activeSidebarLink {
   @apply dark:bg-selectDark bg-selectWhite;
 }
+.h-120 {
+  height: 25rem;
+}

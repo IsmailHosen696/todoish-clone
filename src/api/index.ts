@@ -13,9 +13,13 @@ export async function updateNoteTrashCollectiontData(id: string, trashp: boolean
     const updateRef = await doc(firestore, 'notes', id);
     setDoc(updateRef, { inTrash: trashp }, { merge: true })
 }
-export async function updateNoteImportantCollectiontData(id: string, trashp: boolean) {
+export async function updateNoteCompleteCollectiontData(id: string, imp: boolean) {
     const updateRef = await doc(firestore, 'notes', id);
-    setDoc(updateRef, { inTrash: trashp }, { merge: true })
+    setDoc(updateRef, { isCompleted: imp }, { merge: true })
+}
+export async function updateNoteImportantCollectiontData(id: string, imp: boolean) {
+    const updateRef = await doc(firestore, 'notes', id);
+    setDoc(updateRef, { isImportant: imp }, { merge: true })
 }
 export async function deleteDataFromNoteCollectiont(id: string) {
     const updateRef = await doc(firestore, 'notes', id);
