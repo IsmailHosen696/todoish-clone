@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 
-export default function CustomSelect(props: { handleSubmit: Function }) {
+export default function CustomSelect(props: { handleSubmit: Function, name: string }) {
     const [isColorsOpen, setIsColorsOpen] = useState<boolean>(false);
     const [color, setColor] = useState({ color: 'Light Gray', code: 'bg-gray-500' });
     useEffect(() => {
         props.handleSubmit(color.code);
-    }, [color])
+    }, [color, props])
     return (
         <div className='w-full relative py-2'>
             <div className="flex w-full flex-col">
-                <label htmlFor="selectcolor" className='dark:text-gray-300'>Color</label>
-                <div id="selectcolor" onClick={() => setIsColorsOpen(!isColorsOpen)} className='py-1 w-full cursor-pointer px-2 dark:text-gray-200 outline-none rounded ring-transparent ring focus:ring-blue-500 bg-viewboxDark' >
+                <label htmlFor="selectcolor" className='dark:text-gray-300'>{props.name}</label>
+                <div id="selectcolor" onClick={() => setIsColorsOpen(!isColorsOpen)} className='py-1 w-full cursor-pointer px-2 dark:text-gray-200 outline-none rounded ring-transparent ring focus:ring-blue-500 dark:bg-viewboxDark border border-gray-300 dark:border-transparent' >
                     <button className={`w-3 h-3 rounded-full ${color.code}`}></button>
                     <span className="dark:text-gray-300 px-3">{color.color}</span>
                 </div>
             </div>
             {
                 isColorsOpen &&
-                <div className="flex absolute top-10 flex-col overflow-y-auto py-1 h-36 bg-projHeadDark w-full">
+                <div className="flex absolute top-14 flex-col overflow-y-auto py-1 h-36 dark:bg-projHeadDark w-full">
                     <div onClick={() => { setColor({ color: 'Fuchsia', code: 'bg-fuchsia-500' }); setIsColorsOpen(false) }} className={`flex items-center cursor-pointer w-full px-2 py-1 ${color.code === 'bg-fuchsia-500' && 'bg-selectWhite dark:bg-selectDark'} dark:hover:bg-selectDark`}>
                         <button className="w-3 h-3 rounded-full bg-fuchsia-500"></button>
                         <span className="dark:text-gray-300 px-3">Fuchsia</span>

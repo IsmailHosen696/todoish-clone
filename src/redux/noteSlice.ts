@@ -1,28 +1,42 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { noteType, projectType } from '../types'
+import { noteType, projectType, tagType } from '../types'
 
 interface NoteState {
     notes: noteType[],
-    isLoading: boolean,
-    projects: projectType[]
+    projects: projectType[],
+    tags: tagType[]
 }
 
 const initialState: NoteState = {
     notes: [],
-    isLoading: false,
-    projects: []
+    projects: [],
+    tags: []
 }
 
 export const noteSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        projects: (state, action: PayloadAction<projectType[]>) => {
+        // for projects
+        getALlProject: (state, action: PayloadAction<projectType[]>) => {
             state.projects = action.payload;
         },
         addProjects: (state, action: PayloadAction<projectType>) => {
             state.projects = [...state.projects, action.payload];
         },
+        deleteProject: (state, action: PayloadAction<string>) => {
+            state.projects = state.projects.filter(project => project.id !== action.payload);
+        },
+        getAllTag: (state, action: PayloadAction<tagType[]>) => {
+            state.tags = action.payload;
+        },
+        addTag: (state, action: PayloadAction<tagType>) => {
+            state.tags = [...state.tags, action.payload];
+        },
+        deleteTag: (state, action: PayloadAction<string>) => {
+            state.tags = state.tags.filter(tag => tag.id !== action.payload);
+        },
+        // for notes
         addNote: (state, action: PayloadAction<noteType>) => {
             state.notes = [...state.notes, action.payload];
         },
@@ -53,13 +67,10 @@ export const noteSlice = createSlice({
         },
         deleteNote: (state, action: PayloadAction<string>) => {
             state.notes = state.notes.filter(note => note.id !== action.payload);
-        },
-        setLoading: (state, action: PayloadAction<boolean>) => {
-            state.isLoading = action.payload;
         }
     },
 })
 
-export const { addNote, setNotes, setLoading, addToTrash, makeComplete, deleteNote, addProjects, projects } = noteSlice.actions
+export const { addNote, setNotes, addToTrash, makeComplete, deleteNote, addProjects, deleteTag, addTag, getAllTag, getALlProject, deleteProject } = noteSlice.actions
 
 export default noteSlice.reducer

@@ -1,4 +1,5 @@
 export type noteType = {
+    parent: string;
     id: string;
     uuid?: string;
     description: string;
@@ -14,6 +15,13 @@ export type userType = {
     email: string;
 }
 export type projectType = {
+    uid?: string;
+    id: string;
+    name: string;
+    color: string
+}
+export type tagType = {
+    uid?: string;
     id: string;
     name: string;
     color: string

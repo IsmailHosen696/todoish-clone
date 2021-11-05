@@ -3,17 +3,26 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from './store'
 
 interface NoteUtilsState {
-    theme: string,
-    isSidebarOpen: boolean,
-    isAddNoteOpen: boolean,
-    isNewProjectOpen: boolean
+    theme: string;
+    isSidebarOpen: boolean;
+    isAddNoteOpen: boolean;
+    isNewProjectOpen: boolean;
+    isLoading: boolean;
+    isError: boolean;
+    isNewTagOpen: boolean;
+    errorstring: string;
+
 }
 
 const initialState: NoteUtilsState = {
     theme: '',
     isSidebarOpen: true,
     isAddNoteOpen: false,
-    isNewProjectOpen: false
+    isNewProjectOpen: false,
+    isNewTagOpen: false,
+    isLoading: false,
+    isError: false,
+    errorstring: ''
 }
 
 export const noteUtilsSlice = createSlice({
@@ -31,11 +40,23 @@ export const noteUtilsSlice = createSlice({
         },
         setNewProjectOpen: (state, action: PayloadAction<boolean>) => {
             state.isNewProjectOpen = action.payload
-        }
+        },
+        setNewTagOpen: (state, action: PayloadAction<boolean>) => {
+            state.isNewTagOpen = action.payload
+        },
+        setLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload;
+        },
+        setErrorState: (state, action: PayloadAction<boolean>) => {
+            state.isError = action.payload;
+        },
+        setErrorString: (state, action: PayloadAction<string>) => {
+            state.errorstring = action.payload;
+        },
     },
 })
 
-export const { setTheme, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen } = noteUtilsSlice.actions
+export const { setTheme, setErrorString, setLoading, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen } = noteUtilsSlice.actions
 
 export default noteUtilsSlice.reducer
 

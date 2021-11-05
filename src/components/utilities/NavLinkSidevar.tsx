@@ -4,7 +4,8 @@ interface propType {
     name: string,
     icon: JSX.Element,
     count: number,
-    path: string
+    path: string,
+    iconcolor: string
 }
 export default function NavLinkSidevar(props: propType) {
     return (
@@ -14,7 +15,9 @@ export default function NavLinkSidevar(props: propType) {
             exact to={props.path}>
             <span
                 className="items-center flex">
-                {props.icon}
+                <span className={props.iconcolor}>
+                    {props.icon}
+                </span>
                 <span className="px-1 dark:text-gray-300">
                     {props.name}
                 </span>

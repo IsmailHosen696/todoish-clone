@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export default function useClick(adjustRef: any) {
-    const [isInsideClick, setIsInsideClick] = useState<boolean>(false)
+    const [isInsideClick, setIsInsideClick] = useState<boolean>(true)
 
     useEffect(() => {
         const handleClick = (e: any) => {
