@@ -52,7 +52,7 @@ export default function Sidebar() {
                 <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={0} path="/upcoming" />
                 {/* projects */}
                 <button
-                    className="flex justify-between pl-2 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
+                    className="flex justify-between pl-2 my-1 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
                     <span onClick={() => {
                         setIsProjectOpen(!isProjectOpen);
                     }}
@@ -71,7 +71,7 @@ export default function Sidebar() {
                 {
                     isProjectOpen &&
                     <div>
-                        <div className="items-start ml-4 h-full flex flex-col">
+                        <div className="items-start ml-4 h-full flex flex-col my-1">
                             {projects.length > 0 ?
                                 projects.map((item) => (
                                     <NavLink exact to={`/p/${item.id}`}
@@ -101,7 +101,7 @@ export default function Sidebar() {
                 {/* projects end */}
 
                 {/* lables */}
-                <button className="flex justify-between pl-2 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
+                <button className="flex justify-between my-1 pl-2 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
                     <span onClick={() => {
                         setIsTagsOpen(!isTagsOpen);
                     }}
@@ -126,7 +126,7 @@ export default function Sidebar() {
                 {
                     isTagsOpen &&
                     <div>
-                        <div className="items-start ml-4 h-full flex flex-col">
+                        <div className="items-start ml-4 my-1 h-full flex flex-col">
                             {tags.length > 0 ?
                                 tags.map((item) => (
                                     <div key={item.id}
