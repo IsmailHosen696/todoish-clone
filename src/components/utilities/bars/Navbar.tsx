@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import AdjustIcon from "../../icons/AdjustIcon";
-import HomeIcon from "../../icons/HomeIcon";
-import MenuIcon from "../../icons/MenuIcon";
-import PlusIcon from "../../icons/PlusIcon";
-import SearchIcon from "../../icons/SearchIcon";
-import TimeIcon from "../../icons/TimeIcon";
-import { setAddNotePopOpen, setSidebarOpen, useAppDispatch } from "../../redux/noteUtilsSlice";
-import SettingMenu from "./SettingMenu";
+import AdjustIcon from "../../../icons/AdjustIcon";
+import HomeIcon from "../../../icons/HomeIcon";
+import MenuIcon from "../../../icons/MenuIcon";
+import PlusIcon from "../../../icons/PlusIcon";
+import SearchIcon from "../../../icons/SearchIcon";
+import TimeIcon from "../../../icons/TimeIcon";
+import { setAddNotePopOpen, setSidebarOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
+import SettingMenu from "../popups/SettingMenu";
 
 export default function Navbar() {
     const searchInputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +15,7 @@ export default function Navbar() {
     const [isAdjustmentComponentOpen, setIsAdjustmentComponentOpen] = useState<boolean>(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const dispatch = useAppDispatch();
+    const { isAddNoteOpen } = useAppSelector(state => state.notesutils)
 
     useEffect(() => {
         window.addEventListener('keydown', (e) => setSeatchBarActive(e))
@@ -66,7 +67,7 @@ export default function Navbar() {
                             </div>
                         </div>
                         <div className="flex items-center">
-                            <button className="mx-1 dark:text-gray-200" onClick={() => dispatch(setAddNotePopOpen(true))}>
+                            <button className="mx-1 dark:text-gray-200" onClick={() => dispatch(setAddNotePopOpen(!isAddNoteOpen))}>
                                 <PlusIcon />
                             </button>
                             <button className="mx-1 dark:text-gray-200" onClick={() => setIsAdjustmentComponentOpen(!isAdjustmentComponentOpen)}>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import TimeIcon from "../../icons/TimeIcon";
-import { setTheme, useAppDispatch } from "../../redux/noteUtilsSlice";
+import TimeIcon from "../../../icons/TimeIcon";
+import { setTheme, useAppDispatch } from "../../../redux/noteUtilsSlice";
 
 export default function ThemePopup(props: { isThemePopupOpen: Function }) {
     const [isWhiteThemeSelected, setIsWhiteThemeSelected] = useState<boolean>(true);

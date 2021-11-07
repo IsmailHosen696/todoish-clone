@@ -3,7 +3,7 @@ import { FirebaseError } from "firebase/app/dist/app";
 import { addTagToFirebase } from "../../../api/addProjectApi";
 import { addTag } from "../../../redux/noteSlice";
 import { setErrorState, setErrorString, setLoading, setNewTagOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
-import CustomSelect from "../CustomSelect";
+import CustomSelect from "../popups/CustomSelect";
 import { UUIDGen } from "../UUIDGen";
 import { tagType } from "../../../types";
 import useClick from "../../../hooks/useClick";

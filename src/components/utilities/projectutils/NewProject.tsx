@@ -3,7 +3,7 @@ import { FirebaseError } from "firebase/app/dist/app";
 import { addProjectToFirebase } from "../../../api/addProjectApi";
 import { addProjects } from "../../../redux/noteSlice";
 import { setErrorState, setErrorString, setLoading, setNewProjectOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
-import CustomSelect from "../CustomSelect";
+import CustomSelect from "../popups/CustomSelect";
 import { UUIDGen } from "../UUIDGen";
 import { projectType } from "../../../types";
 import useClick from "../../../hooks/useClick";

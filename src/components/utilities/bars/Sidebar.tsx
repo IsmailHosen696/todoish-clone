@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import AllIcon from "../../icons/AllIcon";
-import GreaterthanIcon from "../../icons/GreaterthanIcon";
-import PlusIcon from "../../icons/PlusIcon";
-import TodayIcon from "../../icons/TodayIcon";
-import UpcomingIcon from "../../icons/UpcomingIcon";
-import { setNewProjectOpen, setNewTagOpen, useAppDispatch, useAppSelector } from "../../redux/noteUtilsSlice";
+import AllIcon from "../../../icons/AllIcon";
+import GreaterthanIcon from "../../../icons/GreaterthanIcon";
+import PlusIcon from "../../../icons/PlusIcon";
+import TodayIcon from "../../../icons/TodayIcon";
+import UpcomingIcon from "../../../icons/UpcomingIcon";
+import { setNewProjectOpen, setNewTagOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
 import NavLinkSidevar from "./NavLinkSidevar";
-import { deletePtojectFromFirebase, deleteTagFromFirebase, getProjectsFromFirebase, getTagFromFirebase } from '../../api/addProjectApi'
-import { getALlProject, deleteProject, deleteTag, getAllTag } from "../../redux/noteSlice";
-import '../../styles/CustomSel.css'
-import TrashIcon from "../../icons/TrashIcon";
-import TagIcon from "../../icons/TagIcon";
+import { deletePtojectFromFirebase, deleteTagFromFirebase, getProjectsFromFirebase, getTagFromFirebase } from '../../../api/addProjectApi'
+import { getALlProject, deleteProject, deleteTag, getAllTag } from "../../../redux/noteSlice";
+import '../../../styles/CustomSel.css';
+import TrashIcon from "../../../icons/TrashIcon";
+import TagIcon from "../../../icons/TagIcon";
 
 export default function Sidebar() {
     const { isSidebarOpen, isNewTagOpen, isNewProjectOpen } = useAppSelector(state => state.notesutils)
@@ -48,11 +48,11 @@ export default function Sidebar() {
         <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "-left-52"} transition-all duration-200 w-52 top-12 bg-sidebarWhite dark:bg-sidebarDark`}>
             <div className="flex pb-20 pt-2 proj overflow-y-auto w-full h-full pl-4 flex-col">
                 <NavLinkSidevar iconcolor={'text-purple-500'} name="Inbox" icon={<AllIcon />} count={0} path="/" />
-                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today Notes" icon={<TodayIcon />} count={0} path="/today" />
+                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today" icon={<TodayIcon />} count={0} path="/today" />
                 <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={0} path="/upcoming" />
                 {/* projects */}
                 <button
-                    className="flex justify-between pl-2 my-1 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
+                    className="flex justify-between pl-2 my-1 pr-1 group w-44 py-1 items-center rounded">
                     <span onClick={() => {
                         setIsProjectOpen(!isProjectOpen);
                     }}
@@ -101,7 +101,7 @@ export default function Sidebar() {
                 {/* projects end */}
 
                 {/* lables */}
-                <button className="flex justify-between my-1 pl-2 pr-1 group dark:hover:bg-selectDark w-44 py-1 items-center rounded hover:bg-selectWhite">
+                <button className="flex justify-between my-1 pl-2 pr-1 group w-44 py-1 items-center rounded">
                     <span onClick={() => {
                         setIsTagsOpen(!isTagsOpen);
                     }}
@@ -130,7 +130,7 @@ export default function Sidebar() {
                             {tags.length > 0 ?
                                 tags.map((item) => (
                                     <div key={item.id}
-                                        className="w-40 px-2 py-1 group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
+                                        className="w-40 px-2 py-1 cursor-pointer group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
                                         <span className="flex items-center">
                                             <TagIcon color={item.color} />
                                             <span className="truncate w-28 dark:text-gray-300 px-2">

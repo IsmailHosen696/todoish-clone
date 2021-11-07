@@ -1,10 +1,10 @@
 import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from "./components/utilities/Navbar";
+import Navbar from "./components/utilities/bars/Navbar";
 import NewNotePopUp from "./components/utilities/noteutils/NewNotePopUp";
-import NewTag from "./components/utilities/noteutils/NewTag";
+import NewTag from "./components/utilities/tagutils/NewTag";
 import NewProject from "./components/utilities/projectutils/NewProject";
-import Sidebar from "./components/utilities/Sidebar";
+import Sidebar from "./components/utilities/bars/Sidebar";
 import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice";
 
 // PAGES
