@@ -1,13 +1,11 @@
 export type noteType = {
-    parent: string;
+    parentid: string;
     id: string;
     uuid?: string;
     description: string;
-    headline: string;
-    date?: string;
+    about: string;
+    tags: [];
     isCompleted: boolean;
-    inTrash: boolean;
-    isImportant: boolean;
 }
 export type userType = {
     uid: string;
@@ -17,12 +15,12 @@ export type userType = {
 export type projectType = {
     uid?: string;
     id: string;
-    name: string;
+    name: string | undefined;
     color: string
 }
 export type tagType = {
     uid?: string;
     id: string;
-    name: string;
+    name: string | undefined;
     color: string
 }

@@ -1,34 +1,52 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import useClick from "../../../hooks/useClick";
+import { addNote } from "../../../redux/noteSlice";
 import { setAddNotePopOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
+import { noteType } from "../../../types";
+import { UUIDGen } from "../UUIDGen";
 import DirSelect from "./DirSelect";
 import TagComponent from "./TagComponent";
 
 export default function NewNotePopUp() {
+
     const dispatch = useAppDispatch()
     const { isAddNoteOpen } = useAppSelector(state => state.notesutils);
     const { projects, tags } = useAppSelector(state => state.notes)
+
     const divRef = useRef<HTMLDivElement>(null);
-    const clicked = useClick(divRef);
-    const [projectObj, setProjectObj] = useState<{}>({ projname: "Today", projcolor: "bg-blue-400" })
-    const [tagObj, setTagObj] = useState<{}>({ tagname: "no tag selected", tagcolor: "bg-gray-700" })
+
+    const { isInsideClick } = useClick(divRef);
+
+    const [projectObj, setProjectObj] = useState({ pId: "Today", projcolor: "bg-blue-400" })
+    const [tagObj, setTagObj] = useState<[]>([])
     const [note, setNote] = useState({ about: '', description: "" })
-    const setTag = (name: string, color: string) => setTagObj({ tagname: name, tagcolor: color })
-    const setProj = (name: string, color: string) => setProjectObj({ projname: name, projcolor: color })
+
+    const setTag = (tagid: []) => setTagObj(tagid)
+    const setProj = (name: string, color: string) => setProjectObj({ pId: name, projcolor: color })
 
     useEffect(() => {
         if (isAddNoteOpen) {
-            if (!clicked) {
+            if (!isInsideClick) {
                 dispatch(setAddNotePopOpen(false))
             }
             return
         }
         return
-    }, [isAddNoteOpen, clicked, dispatch]);
+    }, [isAddNoteOpen, isInsideClick, dispatch]);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        console.log({ ...tagObj, ...projectObj, ...note });
+        console.log([tagObj, projectObj, note])
+        let payload: noteType = {
+            parentid: projectObj.pId,
+            id: UUIDGen(),
+            // uuid?: string | undefined;
+            description: note.description,
+            about: note.about,
+            tags: tagObj,
+            isCompleted: false
+        }
+        dispatch(addNote(payload))
     }
     return (
         <div className="absolute flex justify-center items-center top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-20">

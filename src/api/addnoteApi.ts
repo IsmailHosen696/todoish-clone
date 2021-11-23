@@ -25,13 +25,3 @@ export async function deleteDataFromNoteCollectiont(id: string) {
     const updateRef = await doc(firestore, 'notes', id);
     await deleteDoc(updateRef);
 }
-export async function addData(note: noteType) {
-    await setDoc(doc(firestore, "notes", note.id), {
-        headline: note.headline,
-        description: note.description,
-        inTrash: note.inTrash,
-        isImportant: note.isImportant,
-        isCompleted: note.isCompleted
-    });
-
-}

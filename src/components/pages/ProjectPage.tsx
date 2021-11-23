@@ -1,11 +1,7 @@
-// import { useEffect, useState } from "react"
+// import { useParams } from "react-router-dom"
 
 export default function ProjectPage() {
-    // const [pId, setPId] = useState<string>('')
-    // useEffect(() => {
-    //     const linkArray: string[] = window.location.pathname.split('/');
-    //     setPId(linkArray[linkArray.length - 1]);
-    // }, []);
+    // const params = useParams();
     return (
         <div>
 

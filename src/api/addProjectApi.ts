@@ -19,7 +19,10 @@ export const getProjectsFromFirebase = async () => {
 export const deletePtojectFromFirebase = async (id: string) => {
     await deleteDoc(doc(firestore, "projects", id));
 }
-
+export async function updateProjectNameIntoFirebase(id: string, name: string | undefined) {
+    const updateRef = await doc(firestore, 'projects', id);
+    setDoc(updateRef, { name }, { merge: true })
+}
 // for tags
 export const addTagToFirebase = async (proj: projectType) => {
     await setDoc(doc(firestore, "tags", proj.id), {
@@ -36,4 +39,8 @@ export const getTagFromFirebase = async () => {
 }
 export const deleteTagFromFirebase = async (id: string) => {
     await deleteDoc(doc(firestore, "tags", id));
-} 
+}
+export async function updateTagNameIntoFirebase(id: string, name: string | undefined) {
+    const updateRef = await doc(firestore, 'tags', id);
+    setDoc(updateRef, { name }, { merge: true })
+}

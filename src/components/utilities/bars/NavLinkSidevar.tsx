@@ -10,9 +10,8 @@ interface propType {
 export default function NavLinkSidevar(props: propType) {
     return (
         <NavLink
-            className='flex py-2 px-2 text-sm dark:hover:bg-selectDark dark:focus:bg-blue-400 hover:bg-selectWhite rounded justify-between w-44 items-center focus:bg-blue-400 focus:text-white'
-            activeClassName="activeSidebarLink"
-            exact to={props.path}>
+            className={(pos) => `${pos.isActive ? 'activeSidebarLink' : ""} flex py-2 px-2 text-sm dark:hover:bg-selectDark dark:focus:bg-blue-400 hover:bg-selectWhite rounded justify-between w-44 items-center focus:bg-blue-400 focus:text-white`}
+            to={props.path}>
             <span
                 className="items-center flex">
                 <span className={props.iconcolor}>

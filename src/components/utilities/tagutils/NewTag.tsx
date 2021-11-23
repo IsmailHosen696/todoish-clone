@@ -19,17 +19,17 @@ export default function NewTag() {
     const inpRef = useRef<HTMLInputElement>(null);
     const tagRef = useRef<HTMLDivElement>(null);
 
-    const getClick = useClick(tagRef);
+    const { isInsideClick } = useClick(tagRef);
 
     const handleSubmit = (code: string) => setColorCode(code);
 
     useEffect(() => {
         if (isNewTagOpen) {
-            if (!getClick) {
+            if (!isInsideClick) {
                 dispatch(setNewTagOpen(false))
             }
         }
-    }, [isNewTagOpen, dispatch, getClick])
+    }, [isNewTagOpen, dispatch, isInsideClick])
 
     useEffect(() => {
         inpRef.current?.focus();

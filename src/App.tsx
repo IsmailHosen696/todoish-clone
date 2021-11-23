@@ -1,22 +1,17 @@
 import { Suspense, lazy, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from "./components/utilities/bars/Navbar";
-import NewNotePopUp from "./components/utilities/noteutils/NewNotePopUp";
-import NewTag from "./components/utilities/tagutils/NewTag";
-import NewProject from "./components/utilities/projectutils/NewProject";
-import Sidebar from "./components/utilities/bars/Sidebar";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice";
-
+import Index from './components/pages/Index'
 // PAGES
-const Inbox = lazy(() => import('./components/pages/Inbox'));
-const Upcoming = lazy(() => import('./components/pages/Upcoming'));
-const Today = lazy(() => import('./components/pages/Today'));
-const ProjectPage = lazy(() => import('./components/pages/ProjectPage'));
+const Signin = lazy(() => import('./components/auth/Signin'));
 const PageNotFound = lazy(() => import('./components/pages/PageNotFound'));
-
+const Inbox = lazy(() => import('./components/pages/Inbox'));
+const Today = lazy(() => import('./components/pages/Today'));
+const Upcoming = lazy(() => import('./components/pages/Upcoming'));
+const ProjectPage = lazy(() => import('./components/pages/ProjectPage'));
 function App() {
 
-  const { theme, isAddNoteOpen, isNewTagOpen, isSidebarOpen, isNewProjectOpen } = useAppSelector(state => state.notesutils);
+  const { theme } = useAppSelector(state => state.notesutils);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -38,22 +33,16 @@ function App() {
       <div className="bg-viewboxWhite w-full dark:bg-viewboxDark overflow-hidden min-h-screen">
         <Suspense fallback={'loading'}>
           <Router>
-            <>
-              <Navbar />
-              <Sidebar />
-              {isAddNoteOpen && <NewNotePopUp />}
-              {isNewProjectOpen && <NewProject />}
-              {isNewTagOpen && <NewTag />}
-            </>
-            <div className={`mt-12 ${isSidebarOpen ? 'ml-52' : "ml-10"} z-0 transition-all duration-200`}>
-              <Switch>
-                <Route exact path='/' component={Inbox} />
-                <Route exact path='/today' component={Today} />
-                <Route exact path='/upcoming' component={Upcoming} />
-                <Route exact path='/p/:id' component={ProjectPage} />
-                <Route path='*' component={PageNotFound} />
-              </Switch>
-            </div>
+            <Routes>
+              <Route path='/' element={<Index />} >
+                <Route path='/' element={<Inbox />} />
+                <Route path='today' element={<Today />} />
+                <Route path='upcoming' element={<Upcoming />} />
+                <Route path='/p/:pid' element={<ProjectPage />} />
+              </Route>
+              <Route path='/signin' element={<Signin />} />
+              <Route path='*' element={<PageNotFound />} />
+            </Routes>
           </Router>
         </Suspense>
       </div>

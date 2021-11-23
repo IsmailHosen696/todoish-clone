@@ -19,17 +19,18 @@ export default function NewProject() {
     const inpRef = useRef<HTMLInputElement>(null);
     const projRef = useRef<HTMLDivElement>(null);
 
-    const getClick = useClick(projRef);
+    const { isInsideClick } = useClick(projRef);
 
     const handleSubmit = (code: string) => setColorCode(code);
 
     useEffect(() => {
         if (isNewProjectOpen) {
-            if (!getClick) {
+            if (!isInsideClick) {
                 dispatch(setNewProjectOpen(false))
             }
+            return
         }
-    }, [isNewProjectOpen, dispatch, getClick])
+    }, [isNewProjectOpen, dispatch, isInsideClick])
 
     useEffect(() => {
         inpRef.current?.focus();
@@ -62,6 +63,7 @@ export default function NewProject() {
             dispatch(setErrorString(err.message));
             console.log(err);
         });
+        dispatch(setLoading(false))
     }
     return (
         <div className="absolute z-40 bg-black bg-opacity-25 p-2 top-0 flex justify-center items-center left-0 w-full h-screen">

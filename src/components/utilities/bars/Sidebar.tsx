@@ -5,12 +5,11 @@ import GreaterthanIcon from "../../../icons/GreaterthanIcon";
 import PlusIcon from "../../../icons/PlusIcon";
 import TodayIcon from "../../../icons/TodayIcon";
 import UpcomingIcon from "../../../icons/UpcomingIcon";
-import { setNewProjectOpen, setNewTagOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
+import { setContextPosition, setIsContextMenuOpen, setNewProjectOpen, setNewTagOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
 import NavLinkSidevar from "./NavLinkSidevar";
-import { deletePtojectFromFirebase, deleteTagFromFirebase, getProjectsFromFirebase, getTagFromFirebase } from '../../../api/addProjectApi'
-import { getALlProject, deleteProject, deleteTag, getAllTag } from "../../../redux/noteSlice";
+import { getProjectsFromFirebase, getTagFromFirebase } from '../../../api/addProjectApi'
+import { getALlProject, getAllTag } from "../../../redux/noteSlice";
 import '../../../styles/CustomSel.css';
-import TrashIcon from "../../../icons/TrashIcon";
 import TagIcon from "../../../icons/TagIcon";
 
 export default function Sidebar() {
@@ -35,24 +34,15 @@ export default function Sidebar() {
         })
     }, [dispatch]);
 
-    const handleDeleteProject = (id: string) => {
-        dispatch(deleteProject(id));
-        deletePtojectFromFirebase(id);
-
-    }
-    const handleDeleteTag = (id: string) => {
-        dispatch(deleteTag(id));
-        deleteTagFromFirebase(id);
-    }
     return (
         <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "-left-52"} transition-all duration-200 w-52 top-12 bg-sidebarWhite dark:bg-sidebarDark`}>
             <div className="flex pb-20 pt-2 proj overflow-y-auto w-full h-full pl-4 flex-col">
-                <NavLinkSidevar iconcolor={'text-purple-500'} name="Inbox" icon={<AllIcon />} count={0} path="/" />
-                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today" icon={<TodayIcon />} count={0} path="/today" />
-                <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={0} path="/upcoming" />
+                <NavLinkSidevar iconcolor={'text-purple-500'} name="Inbox" icon={<AllIcon />} count={0} path="" />
+                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today" icon={<TodayIcon />} count={0} path="today" />
+                <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={0} path="upcoming" />
                 {/* projects */}
-                <button
-                    className="flex justify-between pl-2 my-1 pr-1 group w-44 py-1 items-center rounded">
+                <div
+                    className="flex justify-between cursor-pointer pl-2 my-1 pr-1 group w-44 py-1 items-center rounded">
                     <span onClick={() => {
                         setIsProjectOpen(!isProjectOpen);
                     }}
@@ -67,29 +57,31 @@ export default function Sidebar() {
                         className="opacity-0 text-gray-500 dark:text-gray-300 text-sm group-hover:opacity-100">
                         <PlusIcon />
                     </span>
-                </button>
+                </div>
+
                 {
+
                     isProjectOpen &&
                     <div>
                         <div className="items-start ml-4 h-full flex flex-col my-1">
                             {projects.length > 0 ?
                                 projects.map((item) => (
-                                    <NavLink exact to={`/p/${item.id}`}
-                                        activeClassName="activeSidebarLink"
+                                    <NavLink
+                                        onContextMenu={(e) => {
+                                            e.preventDefault()
+                                            dispatch(setIsContextMenuOpen(true))
+                                            dispatch(setContextPosition({ x: e.clientX, y: e.clientY, id: item.id, type: 'project' }))
+                                        }}
+                                        to={`/p/${item.id}`}
+                                        title={`${item.name}`}
                                         key={item.id} id={item.id}
-                                        className="w-40 px-2 py-1 group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
+                                        className={(pos) => `w-40 px-2 py-1 ${pos.isActive ? 'activeSidebarLink' : ''} group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite`}>
                                         <span className="flex items-center">
                                             <div className={`flex w-3 h-3 ${item.color} rounded-full`}></div>
                                             <span className="truncate w-28 dark:text-gray-300 px-2">
                                                 {item.name}
                                             </span>
                                         </span>
-                                        <button onClick={() => {
-                                            handleDeleteProject(item.id)
-                                        }}
-                                            className="dark:text-gray-300 text-gray-700 opacity-0 group-hover:opacity-100 text-sm">
-                                            <TrashIcon />
-                                        </button>
                                     </NavLink>
                                 ))
                                 :
@@ -99,6 +91,7 @@ export default function Sidebar() {
                     </div>
                 }
                 {/* projects end */}
+
 
                 {/* lables */}
                 <button className="flex justify-between my-1 pl-2 pr-1 group w-44 py-1 items-center rounded">
@@ -130,6 +123,11 @@ export default function Sidebar() {
                             {tags.length > 0 ?
                                 tags.map((item) => (
                                     <div key={item.id}
+                                        onContextMenu={(e) => {
+                                            e.preventDefault()
+                                            dispatch(setIsContextMenuOpen(true))
+                                            dispatch(setContextPosition({ x: e.clientX, y: e.clientY, id: item.id, type: 'tag' }))
+                                        }}
                                         className="w-40 px-2 py-1 cursor-pointer group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
                                         <span className="flex items-center">
                                             <TagIcon color={item.color} />
@@ -137,12 +135,6 @@ export default function Sidebar() {
                                                 {item.name}
                                             </span>
                                         </span>
-                                        <button onClick={() => {
-                                            handleDeleteTag(item.id)
-                                        }}
-                                            className="dark:text-gray-300 text-gray-700 opacity-0 group-hover:opacity-100 text-sm">
-                                            <TrashIcon />
-                                        </button>
                                     </div>
                                 ))
                                 :

@@ -1,8 +1,11 @@
+// import ContextMenu from "../utilities/bars/ContextMenu";
+
 export default function Inbox() {
     return (
         <div className="w-full h-full">
             <div className="relative">
-                inbox
+                inbox box
+                {/* <ContextMenu /> */}
             </div>
         </div>
     )

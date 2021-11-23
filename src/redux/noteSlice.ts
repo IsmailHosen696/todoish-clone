@@ -27,6 +27,19 @@ export const noteSlice = createSlice({
         deleteProject: (state, action: PayloadAction<string>) => {
             state.projects = state.projects.filter(project => project.id !== action.payload);
         },
+        updateProject: (state, action: PayloadAction<{ id: string, name: string | undefined }>) => {
+            let newProject = state.projects.map(mapedProjects => {
+                if (mapedProjects.id === action.payload.id) {
+                    return {
+                        ...mapedProjects,
+                        name: action.payload.name
+                    }
+                }
+                return mapedProjects
+            })
+            state.projects = newProject
+        },
+        // tags
         getAllTag: (state, action: PayloadAction<tagType[]>) => {
             state.tags = action.payload;
         },
@@ -36,6 +49,18 @@ export const noteSlice = createSlice({
         deleteTag: (state, action: PayloadAction<string>) => {
             state.tags = state.tags.filter(tag => tag.id !== action.payload);
         },
+        updateTag: (state, action: PayloadAction<{ id: string, name: string | undefined }>) => {
+            const newTag = state.tags.map(mapedTags => {
+                if (mapedTags.id === action.payload.id) {
+                    return {
+                        ...mapedTags,
+                        name: action.payload.name
+                    }
+                }
+                return mapedTags
+            })
+            state.tags = newTag
+        },
         // for notes
         addNote: (state, action: PayloadAction<noteType>) => {
             state.notes = [...state.notes, action.payload];
@@ -43,34 +68,12 @@ export const noteSlice = createSlice({
         setNotes: (state, action: PayloadAction<noteType[]>) => {
             state.notes = action.payload;
         },
-        addToTrash: (state, action: PayloadAction<string>) => {
-            state.notes = state.notes.map((note) => {
-                if (note.id === action.payload) {
-                    return {
-                        ...note,
-                        inTrash: !note.inTrash
-                    }
-                }
-                return note;
-            })
-        },
-        makeComplete: (state, action: PayloadAction<string>) => {
-            state.notes = state.notes.map((note) => {
-                if (note.id === action.payload) {
-                    return {
-                        ...note,
-                        isCompleted: !note.isCompleted
-                    }
-                }
-                return note;
-            });
-        },
         deleteNote: (state, action: PayloadAction<string>) => {
             state.notes = state.notes.filter(note => note.id !== action.payload);
         }
     },
 })
 
-export const { addNote, setNotes, addToTrash, makeComplete, deleteNote, addProjects, deleteTag, addTag, getAllTag, getALlProject, deleteProject } = noteSlice.actions
+export const { addNote, setNotes, updateProject, updateTag, deleteNote, addProjects, deleteTag, addTag, getAllTag, getALlProject, deleteProject } = noteSlice.actions
 
 export default noteSlice.reducer
