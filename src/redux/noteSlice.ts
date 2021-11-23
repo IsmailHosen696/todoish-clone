@@ -62,10 +62,16 @@ export const noteSlice = createSlice({
             state.tags = newTag
         },
         // for notes
+        getAllNotes: (state, action: PayloadAction<noteType[]>) => {
+            state.notes = action.payload
+        },
         addNote: (state, action: PayloadAction<noteType>) => {
             state.notes = [...state.notes, action.payload];
         },
         setNotes: (state, action: PayloadAction<noteType[]>) => {
+            state.notes = action.payload;
+        },
+        upsateNote: (state, action: PayloadAction<noteType[]>) => {
             state.notes = action.payload;
         },
         deleteNote: (state, action: PayloadAction<string>) => {
@@ -74,6 +80,6 @@ export const noteSlice = createSlice({
     },
 })
 
-export const { addNote, setNotes, updateProject, updateTag, deleteNote, addProjects, deleteTag, addTag, getAllTag, getALlProject, deleteProject } = noteSlice.actions
+export const { addNote, upsateNote, setNotes, getAllNotes, deleteNote, getAllTag, addTag, updateProject, updateTag, getALlProject, deleteProject, deleteTag, addProjects } = noteSlice.actions
 
 export default noteSlice.reducer
