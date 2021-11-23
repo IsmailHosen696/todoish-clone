@@ -4,7 +4,7 @@ import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice
 import Index from './components/pages/Index'
 // PAGES
 const Signin = lazy(() => import('./components/auth/Signin'));
-const PageNotFound = lazy(() => import('./components/pages/PageNotFound'));
+const PageNotFound = lazy(() => import('./components/pages/NotFound'));
 const Inbox = lazy(() => import('./components/pages/Inbox'));
 const Today = lazy(() => import('./components/pages/Today'));
 const Upcoming = lazy(() => import('./components/pages/Upcoming'));
