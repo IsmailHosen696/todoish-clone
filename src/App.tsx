@@ -1,14 +1,16 @@
 import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice";
-import Index from './components/pages/Index'
 // PAGES
 const Signin = lazy(() => import('./components/auth/Signin'));
-const PageNotFound = lazy(() => import('./components/pages/NotFound'));
-const Inbox = lazy(() => import('./components/pages/Inbox'));
-const Today = lazy(() => import('./components/pages/Today'));
-const Upcoming = lazy(() => import('./components/pages/Upcoming'));
-const ProjectPage = lazy(() => import('./components/pages/ProjectPage'));
+const Index = lazy(() => import('./components/pages/Index'));
+
+import NotFound from './components/pages/NotFound'
+import Today from './components/pages/Today'
+import Inbox from './components/pages/Inbox'
+import Upcoming from './components/pages/Upcoming'
+import ProjectPage from './components/pages/ProjectPage'
+
 function App() {
 
   const { theme } = useAppSelector(state => state.notesutils);
@@ -41,7 +43,7 @@ function App() {
                 <Route path='/p/:pid' element={<ProjectPage />} />
               </Route>
               <Route path='/signin' element={<Signin />} />
-              <Route path='*' element={<PageNotFound />} />
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </Router>
         </Suspense>
