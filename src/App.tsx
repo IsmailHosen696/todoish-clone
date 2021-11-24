@@ -2,14 +2,16 @@ import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setTheme, useAppDispatch, useAppSelector } from "./redux/noteUtilsSlice";
 // PAGES
-const Signin = lazy(() => import('./components/auth/Signin'));
-const Index = lazy(() => import('./components/pages/Index'));
-
 import NotFound from './components/pages/NotFound'
 import Today from './components/pages/Today'
 import Inbox from './components/pages/Inbox'
 import Upcoming from './components/pages/Upcoming'
 import ProjectPage from './components/pages/ProjectPage'
+
+
+const Signin = lazy(() => import('./components/auth/Signin'));
+const Index = lazy(() => import('./components/pages/Index'));
+
 
 function App() {
 
