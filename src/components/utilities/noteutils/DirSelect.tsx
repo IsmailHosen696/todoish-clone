@@ -20,22 +20,22 @@ export default function DirSelect(props: { projects: projectType[], setProj: Fun
                 isColorOpen &&
                 <div className="flex flex-col overflow-y-auto py-1 dark:bg-projWhite proj mt-1 h-28 proj w-full">
                     <>
-                        <div onClick={() => { setColor('bg-fuchsia-500'); props.setProj('Upcoming', 'bg-fuchsia-500'); setIsColorOpen(false); setDirName('Inbox') }} className={`flex items-center my-1 rounded hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
+                        <div onClick={() => { setColor('bg-fuchsia-500'); props.setProj('Inbox', 'bg-fuchsia-500'); setIsColorOpen(false); setDirName('Inbox') }} className={`flex items-center my-1 rounded hover:bg-selectWhite dark:hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
                             <button className={`w-3 h-3 rounded-full bg-fuchsia-500`}></button>
                             <span className="dark:text-gray-300 px-3">Inbox</span>
                         </div>
-                        <div onClick={() => { props.setProj('Today', 'bg-blue-400'); setColor('bg-blue-400'); setIsColorOpen(false); setDirName('Today') }} className={`flex items-center my-1 rounded hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
+                        <div onClick={() => { props.setProj('Today', 'bg-blue-400'); setColor('bg-blue-400'); setIsColorOpen(false); setDirName('Today') }} className={`flex items-center my-1 rounded hover:bg-selectWhite dark:hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
                             <button className={`w-3 h-3 rounded-full bg-blue-400`}></button>
                             <span className="dark:text-gray-300 px-3">Today</span>
                         </div>
-                        <div onClick={() => { setColor('bg-purple-500'); props.setProj('Upcoming', 'bg-purple-500'); setIsColorOpen(false); setDirName('Upcoming') }} className={`flex items-center my-1 rounded hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
+                        <div onClick={() => { setColor('bg-purple-500'); props.setProj('Upcoming', 'bg-purple-500'); setIsColorOpen(false); setDirName('Upcoming') }} className={`flex items-center my-1 rounded hover:bg-selectWhite dark:hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
                             <button className={`w-3 h-3 rounded-full bg-purple-500`}></button>
                             <span className="dark:text-gray-300 px-3">Upcoming</span>
                         </div>
                     </>
                     {
                         props.projects.map((project) =>
-                            <div onClick={() => { setDirName(project.name); props.setProj(project.id, project.color); setColor(project.color); setIsColorOpen(false) }} key={project.id} className={`flex items-center my-1 proj rounded hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
+                            <div onClick={() => { setDirName(project.name); props.setProj(project.id, project.color); setColor(project.color); setIsColorOpen(false) }} key={project.id} className={`flex items-center my-1 proj rounded hover:bg-selectWhite dark:hover:bg-gray-800 cursor-pointer w-full px-2 py-1`}>
                                 <button className={`w-3 h-3 rounded-full ${project.color}`}></button>
                                 <span className="dark:text-gray-300 px-3">{project.name}</span>
                             </div>

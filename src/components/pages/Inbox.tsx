@@ -1,11 +1,10 @@
-// import ContextMenu from "../utilities/bars/ContextMenu";
+import ShowNotes from "../utilities/noteutils/ShowNotes";
 
 export default function Inbox() {
     return (
         <div className="w-full h-full">
-            <div className="relative">
-                inbox box
-                {/* <ContextMenu /> */}
+            <div className="">
+                <ShowNotes id="Inbox" />
             </div>
         </div>
     )

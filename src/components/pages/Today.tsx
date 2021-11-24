@@ -1,7 +1,9 @@
+import ShowNotes from "../utilities/noteutils/ShowNotes";
+
 export default function Today() {
     return (
         <div>
-            today
+            <ShowNotes id="Today" />
         </div>
     )
 }

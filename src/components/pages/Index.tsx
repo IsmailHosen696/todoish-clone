@@ -1,5 +1,9 @@
+import { FirebaseError } from 'firebase/app'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useAppSelector } from '../../redux/noteUtilsSlice'
+import { getAllNotesFromFirebase } from '../../api/addnoteApi'
+import { getAllNotes } from '../../redux/noteSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/noteUtilsSlice'
 import ContextMenu from '../utilities/bars/ContextMenu'
 import Navbar from '../utilities/bars/Navbar'
 import Sidebar from '../utilities/bars/Sidebar'
@@ -10,7 +14,15 @@ import NewTag from '../utilities/tagutils/NewTag'
 
 export default function Index() {
     const { isAddNoteOpen, isNewTagOpen, isSidebarOpen, isNewProjectOpen, isContextMenuOpen, position, isRenamePopUpOpen } = useAppSelector(state => state.notesutils);
+    const dispatch = useAppDispatch();
 
+    useEffect(() => {
+        getAllNotesFromFirebase().then(data => {
+            dispatch(getAllNotes(data))
+        }).catch((err: FirebaseError) => {
+            console.log(err.message)
+        })
+    })
     return (
         <>
             <Navbar />

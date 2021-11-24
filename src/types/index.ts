@@ -4,7 +4,7 @@ export type noteType = {
     uuid?: string;
     description: string;
     about: string;
-    tags: [];
+    tags?: { id: string }[];
     isCompleted: boolean;
 }
 export type userType = {

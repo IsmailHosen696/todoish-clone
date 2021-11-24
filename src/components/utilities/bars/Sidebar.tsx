@@ -14,7 +14,7 @@ import TagIcon from "../../../icons/TagIcon";
 
 export default function Sidebar() {
     const { isSidebarOpen, isNewTagOpen, isNewProjectOpen } = useAppSelector(state => state.notesutils)
-    const { projects, tags } = useAppSelector(state => state.notes);
+    const { projects, tags, notes } = useAppSelector(state => state.notes);
 
     const [isProjectOpen, setIsProjectOpen] = useState<boolean>(false);
     const [isTagsOpen, setIsTagsOpen] = useState<boolean>(false);
@@ -37,9 +37,9 @@ export default function Sidebar() {
     return (
         <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "-left-52"} transition-all duration-200 w-52 top-12 bg-sidebarWhite dark:bg-sidebarDark`}>
             <div className="flex pb-20 pt-2 proj overflow-y-auto w-full h-full pl-4 flex-col">
-                <NavLinkSidevar iconcolor={'text-purple-500'} name="Inbox" icon={<AllIcon />} count={0} path="" />
-                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today" icon={<TodayIcon />} count={0} path="today" />
-                <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={0} path="upcoming" />
+                <NavLinkSidevar iconcolor={'text-purple-500'} name="Inbox" icon={<AllIcon />} count={notes.filter(note => note.parentid === 'Inbox').length} path="" />
+                <NavLinkSidevar iconcolor={'text-blue-500'} name="Today" icon={<TodayIcon />} count={notes.filter(note => note.parentid === 'Today').length} path="today" />
+                <NavLinkSidevar iconcolor={'text-fuchsia-500'} name="Upcoming" icon={<UpcomingIcon />} count={notes.filter(note => note.parentid === 'Upcoming').length} path="upcoming" />
                 {/* projects */}
                 <div
                     className="flex justify-between cursor-pointer pl-2 my-1 pr-1 group w-44 py-1 items-center rounded">
@@ -78,9 +78,14 @@ export default function Sidebar() {
                                         className={(pos) => `w-40 px-2 py-1 ${pos.isActive ? 'activeSidebarLink' : ''} group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite`}>
                                         <span className="flex items-center">
                                             <div className={`flex w-3 h-3 ${item.color} rounded-full`}></div>
-                                            <span className="truncate w-28 dark:text-gray-300 px-2">
-                                                {item.name}
-                                            </span>
+                                            <div className="flex justify-between items-center w-full">
+                                                <span className="truncate w-24 dark:text-gray-300 px-2">
+                                                    {item.name}
+                                                </span>
+                                                <span className="dark:text-gray-300 text-sm">
+                                                    {notes.filter(note => note.parentid === item.id).length}
+                                                </span>
+                                            </div>
                                         </span>
                                     </NavLink>
                                 ))

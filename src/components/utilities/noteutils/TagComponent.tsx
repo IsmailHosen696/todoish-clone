@@ -20,7 +20,7 @@ export default function TagComponent(props: { tags: tagType[], setTag: Function 
                 {
                     props.tags.map((tag) =>
                         <div onClick={() => handleSelect(tag.id)} className={`flex items-center mr-2 cursor-pointer`} key={tag.id}>
-                            <button type='button' className={`${tag.color} w-4 h-4 rounded-full mr-1 ${tags.find(elem => elem.id === tag.id) ? "ring-2 ring-white" : ""}`}></button>
+                            <button type='button' className={`${tag.color} w-4 h-4 rounded-full mr-1 ${tags.find(elem => elem.id === tag.id) ? "ring-2 dark:ring-white ring-blue-400" : ""}`}></button>
                             <span>{tag.name}</span>
                         </div>
                     )

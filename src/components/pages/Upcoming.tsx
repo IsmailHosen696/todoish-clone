@@ -1,7 +1,9 @@
+import ShowNotes from "../utilities/noteutils/ShowNotes";
+
 export default function Upcoming() {
     return (
         <div>
-            upcoming
+            <ShowNotes id="Upcoming" />
         </div>
     )
 }
