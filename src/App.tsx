@@ -7,6 +7,7 @@ import Today from './components/pages/Today'
 import Inbox from './components/pages/Inbox'
 import Upcoming from './components/pages/Upcoming'
 import ProjectPage from './components/pages/ProjectPage'
+import Signup from "./components/auth/Signup";
 
 
 const Signin = lazy(() => import('./components/auth/Signin'));
@@ -45,6 +46,7 @@ function App() {
                 <Route path='/p/:pid' element={<ProjectPage />} />
               </Route>
               <Route path='/signin' element={<Signin />} />
+              <Route path='/signup' element={<Signup />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Router>
