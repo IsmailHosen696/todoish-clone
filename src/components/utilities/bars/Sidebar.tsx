@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AllIcon from "../../../icons/AllIcon";
 import GreaterthanIcon from "../../../icons/GreaterthanIcon";
@@ -7,8 +7,6 @@ import TodayIcon from "../../../icons/TodayIcon";
 import UpcomingIcon from "../../../icons/UpcomingIcon";
 import { setContextPosition, setIsContextMenuOpen, setNewProjectOpen, setNewTagOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
 import NavLinkSidevar from "./NavLinkSidevar";
-import { getProjectsFromFirebase, getTagFromFirebase } from '../../../api/addProjectApi'
-import { getALlProject, getAllTag } from "../../../redux/noteSlice";
 import '../../../styles/CustomSel.css';
 import TagIcon from "../../../icons/TagIcon";
 
@@ -20,20 +18,6 @@ export default function Sidebar() {
     const [isTagsOpen, setIsTagsOpen] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        getProjectsFromFirebase().then(data => {
-            dispatch(getALlProject(data));
-        }).catch((err) => {
-            console.log(err);
-        })
-        getTagFromFirebase().then(data => {
-            dispatch(getAllTag(data));
-        }).catch((err) => {
-            console.log(err);
-        })
-    }, [dispatch]);
-
     return (
         <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "-left-52"} transition-all duration-200 w-52 top-12 bg-sidebarWhite dark:bg-sidebarDark`}>
             <div className="flex pb-20 pt-2 proj overflow-y-auto w-full h-full pl-4 flex-col">

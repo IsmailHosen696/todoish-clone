@@ -12,7 +12,7 @@ import TagComponent from "./TagComponent";
 export default function NewNotePopUp() {
 
     const dispatch = useAppDispatch()
-    const { isAddNoteOpen } = useAppSelector(state => state.notesutils);
+    const { isAddNoteOpen, user } = useAppSelector(state => state.notesutils);
     const { projects, tags } = useAppSelector(state => state.notes)
 
     const divRef = useRef<HTMLDivElement>(null);
@@ -43,7 +43,7 @@ export default function NewNotePopUp() {
         let payload: noteType = {
             parentid: projectObj.pId,
             id: UUIDGen(),
-            // uuid?: string | undefined;
+            uuid: user.uid,
             description: note.description,
             about: note.about,
             tags: tagObj,

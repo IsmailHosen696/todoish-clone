@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { usertype } from '../types'
 import { AppDispatch, RootState } from './store'
 
 interface NoteUtilsState {
@@ -10,11 +11,13 @@ interface NoteUtilsState {
     isLoading: boolean;
     isError: boolean;
     isNewTagOpen: boolean;
+    isThemePopUpOpen: boolean;
     errorstring: string;
-    isContextMenuOpen: boolean
+    isContextMenuOpen: boolean;
     position: { x: number, y: number, id: string, type: string };
     isRenamePopUpOpen: boolean;
-
+    user: usertype;
+    isSettingMenuOpen: boolean;
 }
 
 const initialState: NoteUtilsState = {
@@ -24,11 +27,14 @@ const initialState: NoteUtilsState = {
     isAddNoteOpen: false,
     isNewProjectOpen: false,
     isNewTagOpen: false,
+    isSettingMenuOpen: false,
     isLoading: false,
+    isThemePopUpOpen: false,
     isError: false,
     isRenamePopUpOpen: false,
     errorstring: '',
-    position: { x: 0, y: 0, id: '', type: '' }
+    position: { x: 0, y: 0, id: '', type: '' },
+    user: { uid: '', email: '', displayName: '', photoURL: '' }
 }
 
 export const noteUtilsSlice = createSlice({
@@ -67,11 +73,20 @@ export const noteUtilsSlice = createSlice({
         },
         setIsRenamePopUpOpen: (state, action: PayloadAction<boolean>) => {
             state.isRenamePopUpOpen = action.payload
+        },
+        setIsSettingMenuOpen: (state, action: PayloadAction<boolean>) => {
+            state.isSettingMenuOpen = action.payload
+        },
+        setIsThemePopUpOpen: (state, action: PayloadAction<boolean>) => {
+            state.isThemePopUpOpen = action.payload
+        },
+        setUser: (state, action: PayloadAction<usertype>) => {
+            state.user = action.payload
         }
     },
 })
 
-export const { setTheme, setErrorString, setIsContextMenuOpen, setLoading, setIsRenamePopUpOpen, setContextPosition, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen } = noteUtilsSlice.actions
+export const { setIsSettingMenuOpen, setIsThemePopUpOpen, setTheme, setErrorString, setIsContextMenuOpen, setLoading, setIsRenamePopUpOpen, setContextPosition, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen, setUser } = noteUtilsSlice.actions
 
 export default noteUtilsSlice.reducer
 

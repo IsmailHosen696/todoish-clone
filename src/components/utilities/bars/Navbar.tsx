@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import AdjustIcon from "../../../icons/AdjustIcon";
 import HomeIcon from "../../../icons/HomeIcon";
 import MenuIcon from "../../../icons/MenuIcon";
 import PlusIcon from "../../../icons/PlusIcon";
 import SearchIcon from "../../../icons/SearchIcon";
 import TimeIcon from "../../../icons/TimeIcon";
-import { setAddNotePopOpen, setSidebarOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
-import SettingMenu from "../popups/SettingMenu";
+import { setAddNotePopOpen, setIsSettingMenuOpen, setSidebarOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
+import DotIcon from "../../../icons/DotIcon";
 
 export default function Navbar() {
     const searchInputRef = useRef<HTMLInputElement>(null);
@@ -70,15 +69,11 @@ export default function Navbar() {
                             <button className="mx-1 dark:text-gray-200" onClick={() => dispatch(setAddNotePopOpen(!isAddNoteOpen))}>
                                 <PlusIcon />
                             </button>
-                            <button className="mx-1 dark:text-gray-200" onClick={() => setIsAdjustmentComponentOpen(!isAdjustmentComponentOpen)}>
-                                <AdjustIcon />
+                            <button className="mx-1 w-7 h-7 rounded-full hover:bg-white dark:hover:bg-gray-600 flex items-center justify-center dark:text-gray-200" onClick={() => { setIsAdjustmentComponentOpen(!isAdjustmentComponentOpen); dispatch(setIsSettingMenuOpen(isAdjustmentComponentOpen)) }}>
+                                <DotIcon />
                             </button>
                         </div>
                     </div>
-                    {
-                        isAdjustmentComponentOpen &&
-                        <SettingMenu />
-                    }
                 </div>
             </div>
         </>

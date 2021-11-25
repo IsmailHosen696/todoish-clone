@@ -14,7 +14,7 @@ export default function NewProject() {
     const [inputState, setInputState] = useState<string>('');
     const [colorCode, setColorCode] = useState<string>('');
 
-    const { isLoading, isNewProjectOpen } = useAppSelector(state => state.notesutils);
+    const { isLoading, isNewProjectOpen, user } = useAppSelector(state => state.notesutils);
 
     const inpRef = useRef<HTMLInputElement>(null);
     const projRef = useRef<HTMLDivElement>(null);
@@ -43,7 +43,7 @@ export default function NewProject() {
         // object for set project
         const payload: projectType = {
             id: UUIDGen(),
-            uid: 'uid',
+            uid: user.uid,
             name: inputState,
             color: colorCode
         };

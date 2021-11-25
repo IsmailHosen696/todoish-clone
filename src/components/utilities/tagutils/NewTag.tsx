@@ -14,7 +14,7 @@ export default function NewTag() {
     const [inputState, setInputState] = useState<string>('');
     const [colorCode, setColorCode] = useState<string>('');
 
-    const { isLoading, isNewTagOpen } = useAppSelector(state => state.notesutils);
+    const { isLoading, isNewTagOpen, user } = useAppSelector(state => state.notesutils);
 
     const inpRef = useRef<HTMLInputElement>(null);
     const tagRef = useRef<HTMLDivElement>(null);
@@ -42,7 +42,7 @@ export default function NewTag() {
         // object for set project
         const payload: tagType = {
             id: UUIDGen(),
-            uid: 'uid',
+            uid: user.uid,
             name: inputState,
             color: colorCode
         };

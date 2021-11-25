@@ -1,4 +1,4 @@
-import { setDoc, doc, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { setDoc, doc, collection, getDocs, deleteDoc, query, where } from 'firebase/firestore';
 
 import { firestore } from '../firebase/firebase'
 import { projectType } from '../types';
@@ -10,8 +10,8 @@ export const addProjectToFirebase = async (proj: projectType) => {
         color: proj.color,
     });
 }
-export const getProjectsFromFirebase = async () => {
-    const nameCollection = collection(firestore, 'projects');
+export const getProjectsFromFirebase = async (uid: string) => {
+    const nameCollection = query(collection(firestore, 'projects'), where('uid', '==', uid));
     const collectionSnap = await getDocs(nameCollection);
     const collectionList = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as projectType);
     return collectionList;
@@ -31,8 +31,8 @@ export const addTagToFirebase = async (proj: projectType) => {
         color: proj.color,
     });
 }
-export const getTagFromFirebase = async () => {
-    const nameCollection = collection(firestore, 'tags');
+export const getTagFromFirebase = async (uid: string) => {
+    const nameCollection = query(collection(firestore, 'tags'), where('uid', '==', uid));
     const collectionSnap = await getDocs(nameCollection);
     const collectionList = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as projectType);
     return collectionList;

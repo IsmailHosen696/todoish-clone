@@ -24,3 +24,9 @@ export type tagType = {
     name: string | undefined;
     color: string
 }
+export type usertype = {
+    uid: string;
+    email: string | null;
+    displayName: string | null;
+    photoURL?: string | null
+}
