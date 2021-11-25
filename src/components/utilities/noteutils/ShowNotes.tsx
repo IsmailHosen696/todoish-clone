@@ -16,7 +16,7 @@ export default function ShowNotes(props: { id: string }) {
                 <div className="flex flex-col w-full justify-center items-center">
                     {
                         notes.map(note => (
-                            <div key={note.id} className="flex w-full relative py-3 flex-col dark:bg-gray-800 bg-navWhite shadow rounded px-3 mt-2">
+                            <div key={note.id} className="flex w-full relative py-3 flex-col dark:bg-gray-800 dark:text-gray-200 bg-navWhite shadow rounded px-3 mt-2">
                                 <h1 className="font-medium">{note.about}</h1>
                                 <p className="text-sm py-1">{note.description}</p>
                                 <div className="flex flex-wrap">
@@ -34,10 +34,10 @@ export default function ShowNotes(props: { id: string }) {
                                             dispatch(deleteNote(note.id))
                                             daleteNoteFromFirebase(note.id)
                                         }}
-                                        className="mr-3 hover:bg-gray-200 w-8 h-8 flex items-center justify-center rounded-full">
+                                        className="mr-3 hover:bg-gray-200 dark:hover:bg-gray-700 w-8 h-8 flex items-center justify-center rounded-full">
                                         <TrashIcon />
                                     </button>
-                                    <button className="mr-3 hover:bg-gray-200 w-8 h-8 flex items-center justify-center rounded-full">
+                                    <button className="mr-3 hover:bg-gray-200 dark:hover:bg-gray-700 w-8 h-8 flex items-center justify-center rounded-full">
                                         <Rename />
                                     </button>
                                 </div>

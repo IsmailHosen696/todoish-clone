@@ -1,7 +1,7 @@
 export type noteType = {
     parentid: string;
     id: string;
-    uuid?: string;
+    uid?: string;
     description: string;
     about: string;
     tags?: { id: string }[];

@@ -43,7 +43,7 @@ export default function NewNotePopUp() {
         let payload: noteType = {
             parentid: projectObj.pId,
             id: UUIDGen(),
-            uuid: user.uid,
+            uid: user.uid,
             description: note.description,
             about: note.about,
             tags: tagObj,

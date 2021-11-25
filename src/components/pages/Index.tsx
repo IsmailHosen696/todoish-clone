@@ -16,9 +16,10 @@ import SettingMenu from '../utilities/popups/SettingMenu'
 import ThemePopup from '../utilities/popups/ThemePopup'
 import NewProject from '../utilities/projectutils/NewProject'
 import NewTag from '../utilities/tagutils/NewTag'
+import UserProfile from '../utilities/popups/UserProfile'
 
 export default function Index() {
-    const { isAddNoteOpen, isNewTagOpen, isSidebarOpen, isNewProjectOpen, isThemePopUpOpen, isSettingMenuOpen, isContextMenuOpen, position, isRenamePopUpOpen, user } = useAppSelector(state => state.notesutils);
+    const { isAddNoteOpen, isNewTagOpen, isSidebarOpen, isProfileSettingsOpen, isNewProjectOpen, isThemePopUpOpen, isSettingMenuOpen, isContextMenuOpen, position, isRenamePopUpOpen, user } = useAppSelector(state => state.notesutils);
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     // getting users
@@ -60,6 +61,7 @@ export default function Index() {
             {isNewTagOpen && <NewTag />}
             {isRenamePopUpOpen && <RenameUtils type={position.type} id={position.id} />}
             {isThemePopUpOpen && <ThemePopup />}
+            {isProfileSettingsOpen && <UserProfile />}
             <div className={`mt-12 ${isSidebarOpen ? 'ml-52' : "ml-10"} z-0 transition-all duration-200`}>
                 <Outlet />
             </div>

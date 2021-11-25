@@ -18,6 +18,7 @@ interface NoteUtilsState {
     isRenamePopUpOpen: boolean;
     user: usertype;
     isSettingMenuOpen: boolean;
+    isProfileSettingsOpen: boolean;
 }
 
 const initialState: NoteUtilsState = {
@@ -34,7 +35,8 @@ const initialState: NoteUtilsState = {
     isRenamePopUpOpen: false,
     errorstring: '',
     position: { x: 0, y: 0, id: '', type: '' },
-    user: { uid: '', email: '', displayName: '', photoURL: '' }
+    user: { uid: '', email: '', displayName: '', photoURL: '' },
+    isProfileSettingsOpen: false
 }
 
 export const noteUtilsSlice = createSlice({
@@ -80,13 +82,16 @@ export const noteUtilsSlice = createSlice({
         setIsThemePopUpOpen: (state, action: PayloadAction<boolean>) => {
             state.isThemePopUpOpen = action.payload
         },
+        setIsProfileSettingOpen: (state, action: PayloadAction<boolean>) => {
+            state.isProfileSettingsOpen = action.payload
+        },
         setUser: (state, action: PayloadAction<usertype>) => {
             state.user = action.payload
         }
     },
 })
 
-export const { setIsSettingMenuOpen, setIsThemePopUpOpen, setTheme, setErrorString, setIsContextMenuOpen, setLoading, setIsRenamePopUpOpen, setContextPosition, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen, setUser } = noteUtilsSlice.actions
+export const { setIsSettingMenuOpen, setIsProfileSettingOpen, setIsThemePopUpOpen, setTheme, setErrorString, setIsContextMenuOpen, setLoading, setIsRenamePopUpOpen, setContextPosition, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen, setUser } = noteUtilsSlice.actions
 
 export default noteUtilsSlice.reducer
 

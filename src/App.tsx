@@ -13,7 +13,6 @@ import Loading from "./components/utilities/loader/Loading";
 
 const Signin = lazy(() => import('./components/auth/Signin'));
 const Index = lazy(() => import('./components/pages/Index'));
-const UserProfile = lazy(() => import('./components/pages/UserProfile'));
 
 
 function App() {
@@ -49,7 +48,6 @@ function App() {
               </Route>
               <Route path='/signin' element={<Signin />} />
               <Route path='/signup' element={<Signup />} />
-              <Route path='/user/profile' element={<UserProfile />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Router>
