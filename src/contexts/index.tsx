@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { updateEmail, updatePassword, updateProfile, User } from "firebase/auth";
+import { sendPasswordResetEmail, updateEmail, updatePassword, updateProfile, User } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase/firebase";
 
@@ -8,6 +8,7 @@ interface IContextProps {
     passwordUpdate: (password: string) => Promise<void>;
     displayNameUpdate: (displayName: string) => Promise<void>;
     photoUrlUpdate: (photoURL: string) => Promise<void>;
+    passwordReset: (photoURL: string) => Promise<void>;
 }
 const AuthContexts = React.createContext({} as IContextProps);
 
@@ -43,11 +44,15 @@ export default function AuthProvider(props: { children: any }) {
             }
         );
     }
+    async function passwordReset(email: string) {
+        return await sendPasswordResetEmail(auth, email)
+    }
     const value = {
         emailUpdate,
         passwordUpdate,
         displayNameUpdate,
         photoUrlUpdate,
+        passwordReset
     }
     return (
         <AuthContexts.Provider value={value}>

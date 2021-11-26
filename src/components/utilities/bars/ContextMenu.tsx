@@ -3,7 +3,7 @@ import { daleteNoteFromFirebase } from "../../../api/addnoteApi"
 import { deletePtojectFromFirebase } from "../../../api/addProjectApi"
 import useClick from "../../../hooks/useClick"
 import CopyToClipBoard from "../../../icons/CopyToClipBoard"
-import Rename from "../../../icons/Rename"
+import PencilIcon from "../../../icons/PencilIcon"
 import TrashIcon from "../../../icons/TrashIcon"
 import { deleteNote, deleteProject } from "../../../redux/noteSlice"
 import { setIsContextMenuOpen, setIsRenamePopUpOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice"
@@ -56,7 +56,7 @@ export default function ContextMenu(props: { x: number, y: number, id: string, t
                     dispatch(setIsContextMenuOpen(false))
                     dispatch(setIsRenamePopUpOpen(true));
                 }}>
-                <Rename />
+                <PencilIcon />
                 <span className="text-sm px-2">Rename</span>
             </button>
 

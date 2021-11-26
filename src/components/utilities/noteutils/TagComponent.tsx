@@ -1,31 +1,42 @@
 import { useEffect, useState } from 'react'
-import { tagType } from '../../../types'
+import TagIcon from '../../../icons/TagIcon';
+import { useAppSelector } from '../../../redux/noteUtilsSlice';
 
-export default function TagComponent(props: { tags: tagType[], setTag: Function }) {
-    const [tags, setTags] = useState<{ id: string }[]>([]);
+export default function TagComponent(props: { setTag: Function }) {
+
+    const { tags } = useAppSelector(state => state.notes)
+    const [tag, setTag] = useState<{ id: string }[]>([]);
+
     useEffect(() => {
-        props.setTag(tags)
-    }, [tags, props])
+        props.setTag(tag)
+
+        return () => props.setTag([])
+    }, [tag, props])
+
     const handleSelect = (id: string) => {
-        if (tags.find(elem => elem.id === id)) {
-            setTags(tags.filter(tag => tag.id !== id))
+        if (tag.find(tg => tg.id === id)) {
+            return setTag(tag.filter(tg => tg.id !== id))
         } else {
-            setTags([...tags, { id }])
+            setTag([...tag, { id }])
         }
     }
     return (
-        <div className="flex flex-col mt-2">
-            <p>Add tags</p>
-            <div className="flex flex-wrap mt-1">
-                {
-                    props.tags.map((tag) =>
-                        <div onClick={() => handleSelect(tag.id)} className={`flex items-center mr-2 cursor-pointer`} key={tag.id}>
-                            <button type='button' className={`${tag.color} w-4 h-4 rounded-full mr-1 ${tags.find(elem => elem.id === tag.id) ? "ring-2 dark:ring-white ring-blue-400" : ""}`}></button>
-                            <span>{tag.name}</span>
-                        </div>
-                    )
-                }
+        <>
+            <div className="flex dark:text-gray-200 proj items-start justify-center flex-col px-2 py-1">
+                <div className="flex flex-wrap w-full truncate mt-2">
+                    {
+                        tags.map((tg) =>
+                            <div className="flex border border-gray-200 dark:border-gray-700 py-1 my-1 mr-2 cursor-pointer px-2 items-center rounded" key={tg.id}>
+                                <label onClick={() => handleSelect(tg.id)} htmlFor={tg.id} className={`flex cursor-pointer items-center`}>
+                                    <TagIcon color={`${tg.color} w-5 h-5`} />
+                                    <span className={`text-sm pl-1 w-16 truncate dark:text-gray-200 text-gray-700`}>{tg.name}</span>
+                                </label>
+                                <input id={tg.id} type="checkbox" className='border hue-rotate-180 border-gray-400 rounded-none ml-2 cursor-pointer' />
+                            </div>
+                        )
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 }

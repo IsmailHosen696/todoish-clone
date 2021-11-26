@@ -13,7 +13,7 @@ export default function NewNotePopUp() {
 
     const dispatch = useAppDispatch()
     const { isAddNoteOpen, user } = useAppSelector(state => state.notesutils);
-    const { projects, tags } = useAppSelector(state => state.notes)
+    const { projects } = useAppSelector(state => state.notes)
 
     const divRef = useRef<HTMLDivElement>(null);
 
@@ -86,8 +86,7 @@ export default function NewNotePopUp() {
                             <DirSelect setProj={setProj} projects={projects} />
                         }
                         {
-                            tags.length > 0 &&
-                            <TagComponent setTag={setTag} tags={tags} />
+                            <TagComponent setTag={setTag} />
                         }
                     </form>
                 </div>

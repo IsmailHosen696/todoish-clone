@@ -7,10 +7,11 @@ import Today from './components/pages/Today'
 import Inbox from './components/pages/Inbox'
 import Upcoming from './components/pages/Upcoming'
 import ProjectPage from './components/pages/ProjectPage'
-import Signup from "./components/auth/Signup";
 import Loading from "./components/utilities/loader/Loading";
 
 
+const ForgetPassword = lazy(() => import('./components/auth/ForgetPassword'));
+const Signup = lazy(() => import('./components/auth/Signup'));
 const Signin = lazy(() => import('./components/auth/Signin'));
 const Index = lazy(() => import('./components/pages/Index'));
 
@@ -48,6 +49,7 @@ function App() {
               </Route>
               <Route path='/signin' element={<Signin />} />
               <Route path='/signup' element={<Signup />} />
+              <Route path='/auth/forgetpassword' element={<ForgetPassword />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Router>

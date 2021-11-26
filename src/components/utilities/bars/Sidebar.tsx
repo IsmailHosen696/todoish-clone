@@ -42,7 +42,6 @@ export default function Sidebar() {
                         <PlusIcon />
                     </span>
                 </div>
-
                 {
 
                     isProjectOpen &&
@@ -60,17 +59,17 @@ export default function Sidebar() {
                                         title={`${item.name}`}
                                         key={item.id} id={item.id}
                                         className={(pos) => `w-40 px-2 py-1 ${pos.isActive ? 'activeSidebarLink' : ''} group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite`}>
-                                        <span className="flex items-center">
-                                            <div className={`flex w-3 h-3 ${item.color} rounded-full`}></div>
+                                        <div className="flex w-full items-center">
+                                            <button className={`flex w-3 h-3 ${item.color} px-1 rounded-full`}></button>
                                             <div className="flex justify-between items-center w-full">
-                                                <span className="truncate w-24 dark:text-gray-300 px-2">
+                                                <span className="truncate text-base w-28 dark:text-gray-300 px-2">
                                                     {item.name}
                                                 </span>
                                                 <span className="dark:text-gray-300 text-sm">
                                                     {notes.filter(note => note.parentid === item.id).length}
                                                 </span>
                                             </div>
-                                        </span>
+                                        </div>
                                     </NavLink>
                                 ))
                                 :
@@ -119,8 +118,8 @@ export default function Sidebar() {
                                         }}
                                         className="w-40 px-2 py-1 cursor-pointer group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
                                         <span className="flex items-center">
-                                            <TagIcon color={item.color} />
-                                            <span className="truncate w-28 dark:text-gray-300 px-2">
+                                            <TagIcon color={`${item.color} w-4 h-4`} />
+                                            <span className="truncate font-light text-sm w-28 dark:text-gray-300 px-2">
                                                 {item.name}
                                             </span>
                                         </span>

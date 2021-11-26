@@ -19,14 +19,29 @@ import NewTag from '../utilities/tagutils/NewTag'
 import UserProfile from '../utilities/popups/UserProfile'
 
 export default function Index() {
-    const { isAddNoteOpen, isNewTagOpen, isSidebarOpen, isProfileSettingsOpen, isNewProjectOpen, isThemePopUpOpen, isSettingMenuOpen, isContextMenuOpen, position, isRenamePopUpOpen, user } = useAppSelector(state => state.notesutils);
+    const { isAddNoteOpen,
+        isNewTagOpen,
+        isSidebarOpen,
+        isProfileSettingsOpen,
+        isNewProjectOpen,
+        isThemePopUpOpen,
+        isSettingMenuOpen,
+        isContextMenuOpen,
+        position,
+        isRenamePopUpOpen,
+        user } = useAppSelector(state => state.notesutils);
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     // getting users
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                dispatch(setUser({ uid: user.uid, email: user.email, displayName: user.displayName, photoURL: user.photoURL }))
+                if (!user.emailVerified) {
+                    alert('please verify your email to continue ! check your email for further instruction')
+                    navigate('/signin')
+                } else {
+                    dispatch(setUser({ uid: user.uid, email: user.email, displayName: user.displayName, photoURL: user.photoURL }))
+                }
             } else {
                 navigate('/signin')
             }

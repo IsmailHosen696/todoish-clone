@@ -59,7 +59,7 @@ export default function UserProfile() {
         setMessage('')
         if (email !== user.email) {
             emailUpdate(email as string).then(() => {
-                dispatch(setUser({ displayName: user.displayName, email: email, photoURL: user.photoURL, uid: user.uid }))
+                dispatch(setUser({ ...user, email: email }))
                 setMessage('email updated')
                 setLoading(false)
             }).catch((err: FirebaseError) => {
@@ -70,7 +70,7 @@ export default function UserProfile() {
         if (username !== user.displayName) {
             setLoading(true)
             displayNameUpdate(username as string).then(() => {
-                dispatch(setUser({ displayName: username, email: user.email, photoURL: user.photoURL, uid: user.uid }))
+                dispatch(setUser({ ...user, displayName: username }))
                 setMessage('username updated')
                 setLoading(false)
             }).catch((err: FirebaseError) => {
@@ -98,7 +98,7 @@ export default function UserProfile() {
         if (selectPhoto) {
             setLoading(true)
             photoUrlUpdate(selectPhoto[0]).then(() => {
-                dispatch(setUser({ displayName: user.displayName, email: user.email, photoURL: temporaryPhoto, uid: user.uid }))
+                dispatch(setUser({ ...user, photoURL: temporaryPhoto }))
                 setMessage('profile image updated')
                 setLoading(false)
             }).catch((err: FirebaseError) => {
@@ -176,7 +176,7 @@ export default function UserProfile() {
                         </div>
                         <div className="flex mt-5 mb-3">
                             <button disabled={loading} onClick={() => dispatch(setIsProfileSettingOpen(false))} className='text-gray-100 bg-gray-600 mr-5 px-3 rounded py-1'>Cancel</button>
-                            <button disabled={loading} onClick={handleSubmit} className={`${loading ? 'bg-red-200' : 'bg-btnClr'} px-3 rounded py-1 text-gray-200`}>{loading ? <Loading /> : 'Update'}</button>
+                            <button disabled={loading} onClick={handleSubmit} className={`${loading ? 'bg-red-200 cursor-not-allowed' : 'bg-btnClr'} px-3 rounded py-1 text-gray-200`}>{loading ? <Loading /> : 'Update'}</button>
                         </div>
                     </div>
                 </div>
