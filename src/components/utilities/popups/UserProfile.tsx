@@ -114,7 +114,7 @@ export default function UserProfile() {
 
     return (
         <div className='absolute top-0 left-0 h-full w-full z-50 bg-gray-900 flex dark:text-gray-200 items-center justify-center bg-opacity-30'>
-            <div ref={profileRef} className="w-4/12 dark:bg-viewboxDark bg-white py-3 rounded px-5 relative">
+            <div ref={profileRef} className="xl:w-4/12 lg:w-6/12 md:w-7/12 sm:w-8/12 dark:bg-viewboxDark bg-white py-3 rounded px-5 relative">
                 <h1 className='text-center dark:text-gray-200 text-gray-900 py-2'>Update Profile</h1>
                 {error && <h1 className='text-center text-red-400 bg-red-100 rounded mt-2 mb-5 py-2'>{error}</h1>}
                 {message && <h1 className='text-center text-green-400 bg-green-100 rounded mt-2 mb-5 py-2'>{message}</h1>}

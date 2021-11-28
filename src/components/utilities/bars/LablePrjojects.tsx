@@ -18,7 +18,7 @@ export default function LablePrjojects({
 }) {
 
     return (
-        <div className="flex justify-between my-1 pl-2 pr-1 group w-full py-1 items-center rounded">
+        <div className="flex justify-between w-full my-1 sm:pl-2 pr-1 group py-1 items-center rounded">
             <button onClick={() => toggleButton()}
                 className="flex flex-1 items-center">
                 <span className={`dark:text-gray-500 text-gray-500 ${isOpen && 'transform rotate-90'}`}>

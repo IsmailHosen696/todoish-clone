@@ -19,8 +19,8 @@ export default function Sidebar() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "sm:-left-72 hidden "} sm:w-auto w-full z-30 bg-opacity-20 transition-all duration-200 top-12 sm:dark:bg-opacity-20`}>
-            <div className="flex pb-20 pt-8 proj overflow-y-auto sm:w-72 w-full h-full pl-8 pr-2 dark:bg-sidebarDark bg-sidebarWhite flex-col">
+        <div className={`h-full fixed overflow-hidden ${isSidebarOpen ? "left-0" : "sm:-left-72 hidden "} sm:w-auto w-full z-30 bg-opacity-20 transition-all sm:px-0 duration-200 top-12 sm:dark:bg-opacity-20`}>
+            <div className="flex pb-20 pt-8 proj overflow-y-auto sm:w-72 w-full h-full sm:pl-8 px-1 pr-2 dark:bg-sidebarDark bg-sidebarWhite flex-col">
                 <NavLinkSidevar
                     iconcolor={'text-blue-400'}
                     name="Inbox"
@@ -55,7 +55,7 @@ export default function Sidebar() {
                 />
                 {
                     isProjectOpen &&
-                    <div className="w-full ml-2 pr-2 flex flex-col my-1">
+                    <div className="w-full sm:ml-2 pr-2 flex flex-col my-1">
                         {projects.length > 0 ?
                             projects.map((item) => (
                                 <NavLink2 key={item.id} type="Projects" id={item.id} name={item.name} color={item.color} />
