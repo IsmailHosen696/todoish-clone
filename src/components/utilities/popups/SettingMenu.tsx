@@ -26,7 +26,7 @@ export default function SettingMenu() {
         return
     })
     return (
-        <div ref={settingRef} className={`w-auto absolute ${isSettingMenuOpen ? 'top-14' : "top-0"} dark:text-gray-100 rounded transition-all duration-150 right-12 dark:bg-viewboxDark border dark:border-gray-700 border-gray-200 z-50`}>
+        <div ref={settingRef} className={`w-auto absolute ${isSettingMenuOpen ? 'top-14' : "top-0"} dark:text-gray-100 bg-gray-200 rounded transition-all duration-150 right-12 dark:bg-viewboxDark border dark:border-gray-700 border-gray-200 z-50`}>
             <div className="flex flex-col w-full">
                 <button onClick={() => { dispatch(setIsSettingMenuOpen(false)); dispatch(setIsProfileSettingOpen(true)) }} className="flex hover:bg-gray-100 dark:hover:bg-navDark flex-col py-2 pt-2 w-full border-b dark:border-gray-700 border-gray-200">
                     <div className="flex w-full">

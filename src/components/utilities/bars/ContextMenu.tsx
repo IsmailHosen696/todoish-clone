@@ -59,7 +59,7 @@ export default function ContextMenu(props: { x: number, y: number, id: string, t
         }
     }
     return (
-        <div ref={divRef} style={{ position: "absolute", left: `${props.x}px`, top: `${props.y}px` }} className={`dark:bg-projHeadDark bg-navWhite w-36 px-2 py-3 rounded flex flex-col items-start dark:border-gray-700 border`}>
+        <div ref={divRef} style={{ position: "absolute", left: `${props.x}px`, top: `${props.y}px` }} className={`dark:bg-projHeadDark bg-navWhite w-36 px-2 z-50 py-3 rounded flex flex-col items-start dark:border-gray-700 border`}>
             <button
                 className="dark:hover:bg-selectDark hover:bg-selectWhite my-1 flex items-center w-full rounded dark:text-gray-300 px-2 py-1"
                 onClick={() => {
