@@ -41,7 +41,7 @@ export default function ForgetPassword() {
     return (
         <div className="flex w-full h-full">
             <div className="container mx-auto justify-center items-center flex">
-                <div className="flex px-2 py-2 w-4/12 rounded border dark:border-gray-800 dark:bg-viewboxDark dark:text-gray-100 border-gray-200 flex-col mt-10">
+                <div className="flex px-2 py-2 xl:w-4/12 lg:w-6/12 md:w-7/12 sm:w-8/12 w-full rounded border border-gray-200 flex-col mt-10">
                     <div className="flex flex-col w-full">
                         <h1 className="text-center py-2 text-lg">Forget Password</h1>
                         {
@@ -69,7 +69,7 @@ export default function ForgetPassword() {
                         <form onSubmit={handleForgetPassword} className="flex flex-col px-3 mt-2">
                             <div className="flex flex-col">
                                 <label htmlFor="email">email</label>
-                                <input value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} placeholder="add your email address" autoComplete="off" type="email" id="email" className="dark:bg-gray-800 shadow placeholder-gray-400 dark:placeholder-gray-600 border dark:border-transparent dark:text-gray-300 border-gray-200 focus:ring focus:ring-blue-400 outline-none rounded h-10 px-2" />
+                                <input value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} placeholder="add your email address" autoComplete="off" type="email" id="email" className="shadow placeholder-gray-400 dark:placeholder-gray-600 border dark:border-transparent dark:text-gray-300 border-gray-200 focus:ring focus:ring-blue-400 outline-none rounded h-10 px-2" />
                             </div>
                             <button disabled={loading} className="mt-5 mb-2 rounded w-full h-9 bg-btnClr text-gray-100">{loading ? <Loading /> : 'Send'}</button>
                         </form>

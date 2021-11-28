@@ -8,9 +8,10 @@ export default function Upcoming() {
     }, [])
     return (
         <div className="w-full h-full flex flex-col">
-            <div className="w-6/12 mx-auto px-5 mt-5">
+            <div className="w-full mx-auto px-5 mt-5">
                 <p className="text-lg dark:text-gray-200">Upcoming</p>
-            </div>    <ShowNotes id="Upcoming" />
+            </div>
+            <ShowNotes id="Upcoming" />
             <FetchCustomTask pid={`Upcoming`} />
         </div>
     )

@@ -6,7 +6,7 @@ export default function FetchCustomTask(props: { pid: string }) {
     const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false)
 
     return (
-        <div className="flex px-5 w-6/12 mx-auto flex-col">
+        <div className="flex px-5 w-full mx-auto flex-col">
             <div className="my-1 w-full">
                 {
                     !isTaskOpen &&

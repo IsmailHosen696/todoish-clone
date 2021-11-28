@@ -17,7 +17,7 @@ export default function CustomSelect(props: { handleSubmit: Function, name: stri
             </div>
             {
                 isColorsOpen &&
-                <div className="flex absolute top-14 flex-col overflow-y-auto py-1 h-36 dark:bg-projHeadDark w-full">
+                <div className="flex absolute top-14 proj flex-col overflow-y-auto py-1 h-36 dark:bg-projHeadDark w-full">
                     <div onClick={() => { setColor({ color: 'Fuchsia', code: 'bg-fuchsia-500' }); setIsColorsOpen(false) }} className={`flex items-center cursor-pointer w-full px-2 py-1 ${color.code === 'bg-fuchsia-500' && 'bg-selectWhite dark:bg-selectDark'} dark:hover:bg-selectDark`}>
                         <button className="w-3 h-3 rounded-full bg-fuchsia-500"></button>
                         <span className="dark:text-gray-300 px-3">Fuchsia</span>

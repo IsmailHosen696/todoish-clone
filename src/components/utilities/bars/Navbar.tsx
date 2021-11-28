@@ -45,9 +45,9 @@ export default function Navbar() {
     }
     return (
         <>
-            <div className='flex z-10 items-center w-full fixed shadow top-0 dark:bg-navDark bg-navWhite h-12 justify-center'>
+            <div className='flex z-40 items-center w-full fixed shadow top-0 dark:bg-navDark bg-navWhite h-12 justify-center'>
                 <div className="relative w-full">
-                    <div className="w-full px-10 flex items-center justify-between">
+                    <div className="w-full px-3 sm:px-10 flex items-center justify-between">
                         <div className="flex items-center">
                             <button onClick={handleOpen} className="mr-1 pr-1 dark:text-gray-200">
                                 <MenuIcon />
@@ -55,11 +55,16 @@ export default function Navbar() {
                             <Link to='/' className="mx-1 px-1 dark:text-gray-200">
                                 <HomeIcon />
                             </Link >
-                            <div className="flex dark:bg-selectDark h-8 rounded bg-white px-2 ml-2 items-center">
+                            <div className="sm:flex dark:bg-selectDark hidden h-7 rounded bg-white px-2 ml-2 items-center">
                                 <button className="px-1 dark:text-gray-200">
                                     <SearchIcon />
                                 </button>
-                                <input ref={searchInputRef} placeholder="Search notes" onBlur={() => setIsSearchInputFocused(false)} onFocus={() => setIsSearchInputFocused(true)} className={`${isSearchInputFocused && 'w-72'} dark:text-gray-300  w-52 px-1 bg-transparent outline-none border-none`} type="text" />
+                                <input ref={searchInputRef}
+                                    placeholder="Search"
+                                    onBlur={() => setIsSearchInputFocused(false)}
+                                    onFocus={() => setIsSearchInputFocused(true)}
+                                    className={`${isSearchInputFocused && 'sm:w-52'} dark:text-gray-300 sm:w-32 dark:placeholder-gray-300 text-sm px-1 bg-transparent outline-none border-none`}
+                                    type="text" />
                                 <button className={`${isSearchInputFocused ? "visible" : "hidden"} dark:text-gray-200 px-1`}>
                                     <TimeIcon />
                                 </button>

@@ -8,7 +8,7 @@ export default function Today() {
     }, [])
     return (
         <div className="w-full h-full flex flex-col">
-            <div className="w-6/12 mx-auto px-5 mt-5">
+            <div className="w-full mx-auto px-5 mt-5">
                 <p className="text-lg dark:text-gray-200">Today</p>
             </div>
             <ShowNotes id="Today" />

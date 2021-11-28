@@ -22,7 +22,6 @@ import EditNote from '../utilities/noteutils/EditNote'
 export default function Index() {
     const { isAddNoteOpen,
         isNewTagOpen,
-        isSidebarOpen,
         isProfileSettingsOpen,
         isNewProjectOpen,
         isThemePopUpOpen,
@@ -86,19 +85,21 @@ export default function Index() {
     }, [dispatch, user.uid]);
     return (
         <>
-            <Navbar />
-            <Sidebar />
-            {isSettingMenuOpen && <SettingMenu />}
-            {isContextMenuOpen && <ContextMenu type={position.type} id={position.id} x={position.x} y={position.y} />}
-            {isAddNoteOpen && <NewNotePopUp />}
-            {isNewProjectOpen && <NewProject />}
-            {isNewTagOpen && <NewTag />}
-            {isRenamePopUpOpen && <RenameUtils type={position.type} id={position.id} />}
-            {isThemePopUpOpen && <ThemePopup />}
-            {isProfileSettingsOpen && <UserProfile />}
-            {isEditNoteOpen && <EditNote />}
-            <div className={`mt-12 w-full h-full ${isSidebarOpen ? 'ml-52' : ""} z-0  transition-all duration-200`}>
-                <Outlet />
+            <div className="bg-viewboxWhite w-full min-h-screen dark:bg-viewboxDark overflow-x-hidden">
+                <Navbar />
+                <Sidebar />
+                {isSettingMenuOpen && <SettingMenu />}
+                {isContextMenuOpen && <ContextMenu type={position.type} id={position.id} x={position.x} y={position.y} />}
+                {isAddNoteOpen && <NewNotePopUp />}
+                {isNewProjectOpen && <NewProject />}
+                {isNewTagOpen && <NewTag />}
+                {isRenamePopUpOpen && <RenameUtils type={position.type} id={position.id} />}
+                {isThemePopUpOpen && <ThemePopup />}
+                {isProfileSettingsOpen && <UserProfile />}
+                {isEditNoteOpen && <EditNote />}
+                <div className={`mt-12 w-full h-full z-10 xl:w-6/12 lg:w-8/12 mx-auto transition-all duration-200`}>
+                    <Outlet />
+                </div>
             </div>
         </>
     )

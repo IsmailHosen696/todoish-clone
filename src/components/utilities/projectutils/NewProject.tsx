@@ -45,7 +45,7 @@ export default function NewProject() {
             id: UUIDGen(),
             uid: user.uid,
             name: inputState,
-            color: colorCode
+            color: colorCode,
         };
         // adding project name and color to redux state
         dispatch(addProjects(payload));
@@ -67,7 +67,7 @@ export default function NewProject() {
     }
     return (
         <div className="absolute z-40 bg-black bg-opacity-25 p-2 top-0 flex justify-center items-center left-0 w-full h-screen">
-            <div ref={projRef} className="w-120 rounded h-120 dark:bg-projDark bg-white py-2 relative">
+            <div ref={projRef} className="sm:w-96 w-full rounded h-120 dark:bg-projDark bg-white py-2 relative">
                 <div className="absolute h-10 rounded-t dark:bg-projHeadDark px-3 py-2 top-0 left-0 w-full">
                     <p className="text-black dark:text-white">
                         Add Project

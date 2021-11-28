@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, Timestamp } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import { getStorage } from 'firebase/storage';
 
@@ -21,5 +21,7 @@ export const firestore = getFirestore(app);
 export const auth = getAuth();
 
 export const storage = getStorage(app);
+
+export const timestamp = Timestamp
 
 export const provider = new GoogleAuthProvider();

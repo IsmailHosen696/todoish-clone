@@ -17,7 +17,7 @@ export default function ShowNotes(props: { id: string }) {
     return (
         <div className="w-full h-full flex justify-center items-center">
             {notes.length > 0 &&
-                <div className="flex flex-col p-4 w-6/12">
+                <div className="flex flex-col p-4 w-full">
                     {/* rendering note with parentid */}
                     <div className="flex w-full justify-center flex-col">
                         {notes.map(note => (
@@ -32,7 +32,7 @@ export default function ShowNotes(props: { id: string }) {
                                                 note.tags?.map((tag) => (
                                                     <div key={tag.id} className={`flex mr-1 items-center cursor-pointer hover:underline hover:text-blue-500 rounded h-8 px-1`}>
                                                         <TagIcon color={` ${alltag.find(tg => tg.id === tag.id)?.color as string}`} />
-                                                        <span className={`text-xs w-16 truncate ml-1`}>{alltag.find(tg => tg.id === tag.id)?.name}</span>
+                                                        <span style={{ maxWidth: "4.5rem" }} className={`text-xs truncate ml-1`}>{alltag.find(tg => tg.id === tag.id)?.name}</span>
                                                     </div>
                                                 ))
                                             }

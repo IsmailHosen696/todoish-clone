@@ -18,24 +18,22 @@ const Index = lazy(() => import('./components/pages/Index'));
 function App() {
 
   return (
-    <div className="bg-viewboxWhite w-full min-h-screen dark:bg-viewboxDark overflow-x-hidden">
-      <Suspense fallback={<div className=" h-screen flex items-center justify-center w-full"> <Loading /></div>}>
-        <Router>
-          <Routes>
-            <Route path='/' element={<Index />} >
-              <Route path='/' element={<Inbox />} />
-              <Route path='today' element={<Today />} />
-              <Route path='upcoming' element={<Upcoming />} />
-              <Route path='/p/:pid' element={<ProjectPage />} />
-            </Route>
-            <Route path='/signin' element={<Signin />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/auth/forgetpassword' element={<ForgetPassword />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </Router>
-      </Suspense>
-    </div>
+    <Suspense fallback={<div className=" h-screen flex items-center justify-center w-full"> <Loading /></div>}>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Index />} >
+            <Route path='/' element={<Inbox />} />
+            <Route path='today' element={<Today />} />
+            <Route path='upcoming' element={<Upcoming />} />
+            <Route path='/p/:pid' element={<ProjectPage />} />
+          </Route>
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/auth/forgetpassword' element={<ForgetPassword />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Router>
+    </Suspense>
   );
 }
 

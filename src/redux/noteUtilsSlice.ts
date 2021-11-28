@@ -26,7 +26,7 @@ interface NoteUtilsState {
 const initialState: NoteUtilsState = {
     theme: '',
     isContextMenuOpen: false,
-    isSidebarOpen: true,
+    isSidebarOpen: false,
     isAddNoteOpen: false,
     isNewProjectOpen: false,
     isNewTagOpen: false,

@@ -6,6 +6,7 @@ export type noteType = {
     about: string;
     tags?: { id: string }[];
     isCompleted: boolean;
+    timestamp?: string
 }
 export type userType = {
     uid: string;
@@ -13,12 +14,14 @@ export type userType = {
     email: string;
 }
 export type projectType = {
+    timestamp?: string;
     uid?: string;
     id: string;
     name: string | undefined;
     color: string
 }
 export type tagType = {
+    timestamp?: string;
     uid?: string;
     id: string;
     name: string | undefined;

@@ -64,7 +64,7 @@ export default function NewNotePopUp() {
     return (
         <div className="absolute flex justify-center items-center top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-20">
             <div ref={divRef} className="relative dark:bg-gray-900 bg-viewboxWhite py-2 px-5 rounded">
-                <div className="w-96 dark:text-gray-300">
+                <div className="sm:w-96 w-full dark:text-gray-300">
                     <p className="pt-2 text-center">Add note</p>
                     <form onSubmit={handleSubmit} className="my-2 flex flex-col">
                         <div className="flex flex-col relative my-2">

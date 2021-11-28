@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import { daleteNoteFromFirebase } from "../../../api/addnoteApi"
 import { deletePtojectFromFirebase } from "../../../api/addProjectApi"
 import useClick from "../../../hooks/useClick"
@@ -10,7 +11,7 @@ import { setIsContextMenuOpen, setIsRenamePopUpOpen, useAppDispatch, useAppSelec
 
 export default function ContextMenu(props: { x: number, y: number, id: string, type: string }) {
     const divRef = useRef<HTMLDivElement>(null)
-
+    const navigate = useNavigate();
     const { isInsideClick } = useClick(divRef)
 
     const { notes } = useAppSelector(state => state.notes)
@@ -26,8 +27,23 @@ export default function ContextMenu(props: { x: number, y: number, id: string, t
 
     const handleDeleteProject = () => {
         if (props.type === 'project') {
-            if (window.confirm('this action will also delete all the inside note . dou you want to delete this ?')) {
-
+            if (notes.filter(note => note.parentid === props.id).length > 0) {
+                if (window.confirm('this action will also delete all the inside note . dou you want to delete this ?')) {
+                    const prjNotes = notes.filter(note => note.parentid === props.id)
+                    prjNotes.forEach(note => {
+                        dispatch(deleteNote(note.id))
+                        daleteNoteFromFirebase(note.id)
+                    });
+                    navigate('/')
+                    dispatch(deleteProject(props.id));
+                    deletePtojectFromFirebase(props.id);
+                    dispatch(setIsContextMenuOpen(false))
+                } else {
+                    dispatch(setIsContextMenuOpen(false))
+                    return
+                }
+            }
+            else {
                 const prjNotes = notes.filter(note => note.parentid === props.id)
                 prjNotes.forEach(note => {
                     dispatch(deleteNote(note.id))
@@ -36,16 +52,10 @@ export default function ContextMenu(props: { x: number, y: number, id: string, t
                 dispatch(deleteProject(props.id));
                 deletePtojectFromFirebase(props.id);
                 dispatch(setIsContextMenuOpen(false))
-            } else {
-                dispatch(setIsContextMenuOpen(false))
-                return
+                navigate('/')
             }
         } else {
-            // notes.filter(note => {
-            //     return note.tags?.filter(tag => {
-            //         s
-            //     })
-            // })
+            alert('the feature will be coming soon')
         }
     }
     return (
