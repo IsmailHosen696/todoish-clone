@@ -63,17 +63,18 @@ export default function AddTask(props: { setIsTaskOpen: Function, pid: string })
                         {error}
                     </p>
                 }
-                <div className="flex flex-col mb-2">
+                <div className="flex flex-col relative mb-2">
                     <input type="text"
-                        className='rounded-t outline-none px-2 py-2 text-sm placeholder-gray-500 dark:text-gray-300 dark:bg-gray-800'
+                        maxLength={15}
+                        className='rounded-t outline-none px-2 py-2 font-medium text-sm placeholder-gray-500 dark:text-gray-300 dark:bg-gray-800'
                         value={about} onChange={(e: ChangeEvent<HTMLInputElement>) => setAbout(e.target.value)} placeholder='note e.g about' />
-                    <textarea className='rounded-b outline-none px-2 font-light pb-1 text-sm placeholder-gray-500 dark:bg-gray-800 resize-none dark:text-gray-300 pt-3'
+                    <textarea className='rounded-b outline-none px-2 pb-1 text-sm placeholder-gray-500 dark:bg-gray-800 resize-none dark:text-gray-400 pt-1'
                         value={description} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
                         placeholder='description'></textarea>
                 </div>
                 {
                     tags.length > 0 &&
-                    <button title='add tag' onClick={() => setIsTagOpen(!isTagOpen)} className='float-right'><TagOutLineIcon color='text-gray-700' /></button>
+                    <button title='add tag' onClick={() => setIsTagOpen(!isTagOpen)} className='float-right'><TagOutLineIcon color='text-gray-500' /></button>
                 }
             </div>
             {

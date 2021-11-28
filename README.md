@@ -1,4 +1,4 @@
-[App Live Demo](https://tlnd-todoish-clone.netlify.app).
+[App Live Demo](https://react-tailwind-todoist-clone.netlify.app).
 
 # Getting Started with Create React App
 

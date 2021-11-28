@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { addNoteToFirebase } from "../../../api/addnoteApi";
 import useClick from "../../../hooks/useClick";
 import { addNote } from "../../../redux/noteSlice";
@@ -36,7 +36,7 @@ export default function NewNotePopUp() {
         return
     }, [isAddNoteOpen, isInsideClick, dispatch]);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(setErrorState(false));
         dispatch(setLoading(true))
@@ -67,13 +67,15 @@ export default function NewNotePopUp() {
                 <div className="w-96 dark:text-gray-300">
                     <p className="pt-2 text-center">Add note</p>
                     <form onSubmit={handleSubmit} className="my-2 flex flex-col">
-                        <div className="flex flex-col my-2">
+                        <div className="flex flex-col relative my-2">
                             <label className="my-1" htmlFor="about ">about note</label>
                             <input value={note.about}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setNote({ ...note, about: e.target.value })}
                                 type="text" id="about"
                                 autoComplete="off"
+                                maxLength={15}
                                 className="dark:bg-gray-800 border  dark:border-transparent border-gray-200 rounded h-10 px-2 py-1 outline-none focus:ring focus:ring-blue-500" />
+                            <span className="absolute top-11 text-sm right-3">{note.about.length + '/' + 15}</span>
                         </div>
                         <div className="flex flex-col my-2">
                             <label className="my-1" htmlFor="notedesc">description</label>

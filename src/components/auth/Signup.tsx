@@ -1,6 +1,6 @@
 import { FirebaseError } from 'firebase/app'
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, updateProfile } from 'firebase/auth'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth, provider } from '../../firebase/firebase'
 import EyeIcon from '../../icons/EyeIcon'
@@ -11,6 +11,9 @@ import { usertype } from '../../types'
 import Loading from '../utilities/loader/Loading'
 
 export default function Signup() {
+    useEffect(() => {
+        document.title = 'Signup: Todoist'
+    })
     const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')

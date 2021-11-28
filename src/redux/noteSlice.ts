@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { noteType, projectType, tagType } from '../types'
+import { noteType, projectType, tagType, updateNoteType } from '../types'
 
 interface NoteState {
     notes: noteType[],
@@ -71,8 +71,19 @@ export const noteSlice = createSlice({
         setNotes: (state, action: PayloadAction<noteType[]>) => {
             state.notes = action.payload;
         },
-        upsateNote: (state, action: PayloadAction<noteType[]>) => {
-            state.notes = action.payload;
+        updateNote: (state, action: PayloadAction<updateNoteType>) => {
+            let newNote = state.notes.map(mapedNotes => {
+                if (mapedNotes.id === action.payload.id) {
+                    return {
+                        ...mapedNotes,
+                        about: action.payload.about,
+                        description: action.payload.description,
+                        tags: action.payload.tags,
+                    }
+                }
+                return mapedNotes
+            })
+            state.notes = newNote
         },
         deleteNote: (state, action: PayloadAction<string>) => {
             state.notes = state.notes.filter(note => note.id !== action.payload);
@@ -80,6 +91,6 @@ export const noteSlice = createSlice({
     },
 })
 
-export const { addNote, upsateNote, setNotes, getAllNotes, deleteNote, getAllTag, addTag, updateProject, updateTag, getALlProject, deleteProject, deleteTag, addProjects } = noteSlice.actions
+export const { addNote, updateNote, setNotes, getAllNotes, deleteNote, getAllTag, addTag, updateProject, updateTag, getALlProject, deleteProject, deleteTag, addProjects } = noteSlice.actions
 
 export default noteSlice.reducer

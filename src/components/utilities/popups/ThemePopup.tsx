@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useClick from "../../../hooks/useClick";
 import TimeIcon from "../../../icons/TimeIcon";
-import { setIsThemePopUpOpen, setTheme, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
+import { setIsThemePopUpOpen, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice";
 
 export default function ThemePopup() {
     const [isWhiteThemeSelected, setIsWhiteThemeSelected] = useState<boolean>(true);
@@ -28,11 +28,9 @@ export default function ThemePopup() {
         const theme = String(localStorage.getItem('theme'))
         if (theme) {
             if (theme === 'darkTheme') {
-                dispatch(setTheme('darkTheme'))
                 setIsDarkThemeSelected(true);
                 setIsWhiteThemeSelected(false);
             } else {
-                dispatch(setTheme('whiteTheme'))
                 setIsDarkThemeSelected(false);
                 setIsWhiteThemeSelected(true);
 
@@ -42,13 +40,13 @@ export default function ThemePopup() {
     const handleLocalStorageTheme = (theme: string) => {
         localStorage.setItem('theme', theme)
         if (theme === 'whiteTheme') {
-            dispatch(setTheme('whiteTheme'))
             setIsWhiteThemeSelected(true);
+            document.documentElement.classList.remove('dark')
             setIsDarkThemeSelected(false);
         } else {
-            dispatch(setTheme('darkTheme'))
             setIsWhiteThemeSelected(false);
             setIsDarkThemeSelected(true);
+            document.documentElement.classList.add('dark')
         }
     }
 

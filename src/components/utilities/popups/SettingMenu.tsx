@@ -41,8 +41,8 @@ export default function SettingMenu() {
                                 </div>
                         }
                         <div className="flex flex-col items-start">
-                            <p className="px-3">{user.displayName}</p>
-                            <p className="px-3">{user.email}</p>
+                            <p className="px-2 text-sm font-medium text-gray-600 dark:text-gray-300">{user.displayName}</p>
+                            <p className="px-2 text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
                         </div>
                     </div>
                     <div className="mt-5 pl-3 flex items-center"><CogIcon /> <span className="px-2 text-sm">Settings</span></div>

@@ -1,6 +1,6 @@
 import { FirebaseError } from "firebase/app";
 import { sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { auth, provider } from "../../firebase/firebase";
@@ -12,6 +12,9 @@ import { usertype } from "../../types";
 import Loading from "../utilities/loader/Loading";
 
 export default function Signin() {
+    useEffect(() => {
+        document.title = 'Signin: Todoist'
+    })
     const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false)
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('')

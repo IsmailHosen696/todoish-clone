@@ -1,11 +1,14 @@
 import { FirebaseError } from 'firebase/app'
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts'
 import TimeIcon from '../../icons/TimeIcon'
 import Loading from '../utilities/loader/Loading'
 
 export default function ForgetPassword() {
+    useEffect(() => {
+        document.title = 'Forget Password: Todoist'
+    })
     const [email, setEmail] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
@@ -68,7 +71,7 @@ export default function ForgetPassword() {
                                 <label htmlFor="email">email</label>
                                 <input value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} placeholder="add your email address" autoComplete="off" type="email" id="email" className="dark:bg-gray-800 shadow placeholder-gray-400 dark:placeholder-gray-600 border dark:border-transparent dark:text-gray-300 border-gray-200 focus:ring focus:ring-blue-400 outline-none rounded h-10 px-2" />
                             </div>
-                            <button disabled={loading} className="mt-5 mb-2 rounded w-full h-9 bg-btnClr text-gray-100">{loading ? <Loading /> : 'Forget Password'}</button>
+                            <button disabled={loading} className="mt-5 mb-2 rounded w-full h-9 bg-btnClr text-gray-100">{loading ? <Loading /> : 'Send'}</button>
                         </form>
                         <p className="w-full items-center justify-center mt-2 text-center mb-3">
                             <span>Continue with</span>

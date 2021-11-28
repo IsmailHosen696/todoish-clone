@@ -30,3 +30,9 @@ export type usertype = {
     displayName: string | null;
     photoURL?: string | null
 }
+export type updateNoteType = {
+    id: string,
+    about: string,
+    description: string,
+    tags?: { id: string }[]
+}

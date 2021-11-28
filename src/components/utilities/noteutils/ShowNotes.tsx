@@ -3,7 +3,7 @@ import PencilIcon from "../../../icons/PencilIcon"
 import TagIcon from "../../../icons/TagIcon"
 import TrashIcon from "../../../icons/TrashIcon"
 import { deleteNote } from "../../../redux/noteSlice"
-import { useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice"
+import { setIsUpdateNoteOpen, setSelectedNoteForEdit, useAppDispatch, useAppSelector } from "../../../redux/noteUtilsSlice"
 import { noteType } from "../../../types"
 
 export default function ShowNotes(props: { id: string }) {
@@ -24,9 +24,9 @@ export default function ShowNotes(props: { id: string }) {
                             <div key={note.id} className="flex group w-full relative dark:hover:bg-sidebarDark py-3 justify-between border-b border-gray-100 dark:border-gray-700 dark:text-gray-200 px-3">
                                 <div className="flex items-start">
                                     <input onChange={() => handleChange(note.id)} type="radio" className="mt-1 cursor-pointer mr-2" />
-                                    <div className="flex flex-col">
-                                        <h1 className="text-sm">{note.about}</h1>
-                                        <p className="text-xs py-1">{note.description}</p>
+                                    <div className="flex flex-col w-full">
+                                        <h1 className="dark:text-gray-300 text-sm">{note.about}</h1>
+                                        <p className="text-xs leading-relaxed tracking-wider dark:text-gray-400 py-2">{note.description}</p>
                                         <div className="flex flex-wrap">
                                             {
                                                 note.tags?.map((tag) => (
@@ -40,7 +40,12 @@ export default function ShowNotes(props: { id: string }) {
                                     </div>
                                 </div>
                                 <div className="flex opacity-0 group-hover:opacity-100">
-                                    <button className="hover:bg-gray-200 dark:hover:bg-gray-700 w-8 h-8 flex items-center justify-center rounded-full">
+                                    <button
+                                        onClick={() => {
+                                            dispatch(setIsUpdateNoteOpen(true))
+                                            dispatch(setSelectedNoteForEdit(note.id))
+                                        }}
+                                        className="hover:bg-gray-200 dark:hover:bg-gray-700 w-8 h-8 flex items-center justify-center rounded-full">
                                         <PencilIcon />
                                     </button>
                                     <button

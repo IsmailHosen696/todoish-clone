@@ -118,8 +118,8 @@ export default function Sidebar() {
                                         }}
                                         className="w-40 px-2 py-1 cursor-pointer group rounded flex justify-between items-center dark:hover:bg-selectDark hover:bg-selectWhite">
                                         <span className="flex items-center">
-                                            <TagIcon color={`${item.color} w-4 h-4`} />
-                                            <span className="truncate font-light text-sm w-28 dark:text-gray-300 px-2">
+                                            <TagIcon color={`${item.color}`} />
+                                            <span className="truncate w-28 dark:text-gray-300 px-2">
                                                 {item.name}
                                             </span>
                                         </span>

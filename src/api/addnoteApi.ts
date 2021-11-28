@@ -1,5 +1,5 @@
-import { getDocs, setDoc, doc, collection, deleteDoc, where, query } from 'firebase/firestore';
-import { noteType } from '../types';
+import { getDocs, setDoc, doc, collection, deleteDoc, where, query, updateDoc } from 'firebase/firestore';
+import { noteType, updateNoteType } from '../types';
 import { firestore } from '../firebase/firebase'
 
 
@@ -15,6 +15,11 @@ export const addNoteToFirebase = async (note: noteType) => {
 }
 
 export async function daleteNoteFromFirebase(id: string) {
-    const updateRef = await doc(firestore, 'notes', id);
-    await deleteDoc(updateRef);
+    const deleteRef = await doc(firestore, 'notes', id);
+    await deleteDoc(deleteRef);
+}
+
+export const updateFirebaseNote = async (note: updateNoteType) => {
+    const deleteRef = await doc(firestore, 'notes', note.id);
+    updateDoc(deleteRef, note)
 }

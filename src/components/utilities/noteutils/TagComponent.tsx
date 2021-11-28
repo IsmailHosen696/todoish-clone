@@ -9,7 +9,6 @@ export default function TagComponent(props: { setTag: Function }) {
 
     useEffect(() => {
         props.setTag(tag)
-
         return () => props.setTag([])
     }, [tag, props])
 

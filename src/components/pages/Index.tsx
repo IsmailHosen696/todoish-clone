@@ -17,6 +17,7 @@ import ThemePopup from '../utilities/popups/ThemePopup'
 import NewProject from '../utilities/projectutils/NewProject'
 import NewTag from '../utilities/tagutils/NewTag'
 import UserProfile from '../utilities/popups/UserProfile'
+import EditNote from '../utilities/noteutils/EditNote'
 
 export default function Index() {
     const { isAddNoteOpen,
@@ -29,10 +30,28 @@ export default function Index() {
         isContextMenuOpen,
         position,
         isRenamePopUpOpen,
-        user } = useAppSelector(state => state.notesutils);
+        isEditNoteOpen,
+        user
+    } = useAppSelector(state => state.notesutils);
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     // getting users
+
+    useEffect(() => {
+        const localtheme = String(localStorage.getItem('theme'));
+        if (!localtheme) {
+            localStorage.setItem('theme', 'whiteTheme');
+            document.documentElement.classList.remove('dark')
+        } else {
+            if (localtheme === 'darkTheme') {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+
+            }
+        }
+    });
+
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -77,7 +96,8 @@ export default function Index() {
             {isRenamePopUpOpen && <RenameUtils type={position.type} id={position.id} />}
             {isThemePopUpOpen && <ThemePopup />}
             {isProfileSettingsOpen && <UserProfile />}
-            <div className={`mt-12 ${isSidebarOpen ? 'ml-52' : "ml-10"} z-0 transition-all duration-200`}>
+            {isEditNoteOpen && <EditNote />}
+            <div className={`mt-12 w-full h-full ${isSidebarOpen ? 'ml-52' : ""} z-0  transition-all duration-200`}>
                 <Outlet />
             </div>
         </>
