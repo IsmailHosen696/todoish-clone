@@ -101,7 +101,23 @@ export const noteUtilsSlice = createSlice({
     },
 })
 
-export const { setIsSettingMenuOpen, setSelectedNoteForEdit, setIsUpdateNoteOpen, setIsProfileSettingOpen, setIsThemePopUpOpen, setTheme, setErrorString, setIsContextMenuOpen, setLoading, setIsRenamePopUpOpen, setContextPosition, setNewTagOpen, setErrorState, setSidebarOpen, setAddNotePopOpen, setNewProjectOpen, setUser } = noteUtilsSlice.actions
+export const { setIsSettingMenuOpen,
+    setSelectedNoteForEdit,
+    setIsUpdateNoteOpen,
+    setIsProfileSettingOpen,
+    setIsThemePopUpOpen,
+    setTheme, setErrorString,
+    setIsContextMenuOpen,
+    setLoading,
+    setIsRenamePopUpOpen,
+    setContextPosition,
+    setNewTagOpen,
+    setErrorState,
+    setSidebarOpen,
+    setAddNotePopOpen,
+    setNewProjectOpen,
+    setUser
+} = noteUtilsSlice.actions
 
 export default noteUtilsSlice.reducer
 
