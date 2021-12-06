@@ -41,13 +41,13 @@ export default function UserProfile() {
     })
     useEffect(() => {
         if (selectPhoto) {
-            console.log(selectPhoto[0]);
             const object = URL.createObjectURL(selectPhoto[0])
-            setTemporaryPhoto(object)
+            setTemporaryPhoto(object);
+            console.log(object);
             return () => URL.revokeObjectURL(object)
         } else {
-            let test: string = user.photoURL as string
-            setTemporaryPhoto(test);
+            let photoObj: string = user.photoURL as string
+            setTemporaryPhoto(photoObj);
         }
         return
     }, [selectPhoto, user.photoURL])
@@ -98,9 +98,10 @@ export default function UserProfile() {
         if (selectPhoto) {
             setLoading(true)
             photoUrlUpdate(selectPhoto[0]).then(() => {
-                dispatch(setUser({ ...user, photoURL: temporaryPhoto }))
+                const object = URL.createObjectURL(selectPhoto[0])
+                dispatch(setUser({ ...user, photoURL: object }))
                 setMessage('profile image updated')
-                setLoading(false)
+                setLoading(false);
             }).catch((err: FirebaseError) => {
                 setLoading(false)
                 setError(err.message)
@@ -114,13 +115,13 @@ export default function UserProfile() {
 
     return (
         <div className='absolute top-0 left-0 h-full w-full z-50 bg-gray-900 flex dark:text-gray-200 items-center justify-center bg-opacity-30'>
-            <div ref={profileRef} className="xl:w-4/12 lg:w-6/12 md:w-7/12 sm:w-8/12 dark:bg-viewboxDark bg-white py-3 rounded px-5 relative">
+            <div ref={profileRef} className="xl:w-4/12 lg:w-6/12 md:w-7/12 sm:w-8/12 w-11/12 dark:bg-viewboxDark bg-white py-3 rounded px-5 relative">
                 <h1 className='text-center dark:text-gray-200 text-gray-900 py-2'>Update Profile</h1>
                 {error && <h1 className='text-center text-red-400 bg-red-100 rounded mt-2 mb-5 py-2'>{error}</h1>}
                 {message && <h1 className='text-center text-green-400 bg-green-100 rounded mt-2 mb-5 py-2'>{message}</h1>}
                 <div className="flex flex-col items-start">
-                    <div className="flex w-full items-center">
-                        <div className="flex group w-36 h-36 relative">
+                    <div className="flex sm:flex-row flex-col gap-2 w-full items-center">
+                        <div className="flex group sm:w-36 sm:h-36 w-24 h-24 relative">
                             <div className="flex w-full h-full rounded-full items-center justify-center border-2 border-blue-500">
                                 {
                                     (!temporaryPhoto) ?

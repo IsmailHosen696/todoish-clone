@@ -12,7 +12,7 @@ export default function Navbar() {
     const searchInputRef = useRef<HTMLInputElement>(null);
     const [isSearchInputFocused, setIsSearchInputFocused] = useState<boolean>(false);
     const [isAdjustmentComponentOpen, setIsAdjustmentComponentOpen] = useState<boolean>(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const dispatch = useAppDispatch();
     const { isAddNoteOpen } = useAppSelector(state => state.notesutils)
 
