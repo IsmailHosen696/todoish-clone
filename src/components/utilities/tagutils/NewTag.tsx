@@ -60,7 +60,6 @@ export default function NewTag() {
             dispatch(setLoading(false));
             dispatch(setErrorState(true))
             dispatch(setErrorString(err.message));
-            console.log(err);
         });
     }
     return (

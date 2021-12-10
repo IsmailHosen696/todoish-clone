@@ -43,7 +43,6 @@ export default function UserProfile() {
         if (selectPhoto) {
             const object = URL.createObjectURL(selectPhoto[0])
             setTemporaryPhoto(object);
-            console.log(object);
             return () => URL.revokeObjectURL(object)
         } else {
             let photoObj: string = user.photoURL as string

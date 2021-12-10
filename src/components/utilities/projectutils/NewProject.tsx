@@ -61,7 +61,6 @@ export default function NewProject() {
             dispatch(setLoading(false));
             dispatch(setErrorState(true))
             dispatch(setErrorString(err.message));
-            console.log(err);
         });
         dispatch(setLoading(false))
     }

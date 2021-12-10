@@ -58,7 +58,6 @@ export default function NewNotePopUp() {
             dispatch(setLoading(false))
             dispatch(setErrorState(true));
             dispatch(setErrorString(err.message))
-            console.log(err.message)
         })
     }
     return (

@@ -17,7 +17,6 @@ export default function SettingMenu() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(user.photoURL);
         if (isSettingMenuOpen) {
             if (!isInsideClick) {
                 dispatch(setIsSettingMenuOpen(false))

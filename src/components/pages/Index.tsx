@@ -6,7 +6,7 @@ import { getAllNotesFromFirebase } from '../../api/addnoteApi'
 import { getProjectsFromFirebase, getTagFromFirebase } from '../../api/addProjectApi'
 import { auth } from '../../firebase/firebase'
 import { getAllNotes, getALlProject, getAllTag } from '../../redux/noteSlice'
-import { setUser, useAppDispatch, useAppSelector } from '../../redux/noteUtilsSlice'
+import { setErrorString, setUser, useAppDispatch, useAppSelector } from '../../redux/noteUtilsSlice'
 import ContextMenu from '../utilities/bars/ContextMenu'
 import Navbar from '../utilities/bars/Navbar'
 import Sidebar from '../utilities/bars/Sidebar'
@@ -70,17 +70,17 @@ export default function Index() {
         getAllNotesFromFirebase(user.uid).then(data => {
             dispatch(getAllNotes(data))
         }).catch((err: FirebaseError) => {
-            console.log(err.message)
+            dispatch(setErrorString(err.message))
         })
         getProjectsFromFirebase(user.uid).then(data => {
             dispatch(getALlProject(data));
         }).catch((err) => {
-            console.log(err);
+            dispatch(setErrorString(err));
         })
         getTagFromFirebase(user.uid).then(data => {
             dispatch(getAllTag(data));
         }).catch((err) => {
-            console.log(err);
+            dispatch(setErrorString(err));
         })
     }, [dispatch, user.uid]);
     return (
